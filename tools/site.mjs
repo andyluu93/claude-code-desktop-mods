@@ -1,5 +1,6 @@
 // Builds the GitHub Pages site (index.html at the repo root) from the theme list.
-// The page reuses preview/scenes/*.svg, so the scenes animate exactly as built.
+// The page reuses preview/scenes/*.svg, so the scenes animate exactly as built. The scenes have no ground of
+// their own, so the page puts each look's own page colour (light or dark) behind them, as the app does.
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 const plain = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/gi, 'd').toLowerCase()
@@ -25,7 +26,7 @@ export function siteHtml(themes, owner) {
     slug: t.slug,
     name: t.name,
     category: t.category,
-    mode: t.mode === 'dark' ? 'tối' : 'sáng',
+    ground: t.ground,
     summary: t.summary,
     accent: t.accent,
     onAccent: luminance(t.accent) > 0.36 ? '#1C2230' : '#FFFFFF',
@@ -33,8 +34,8 @@ export function siteHtml(themes, owner) {
   }))
   const categories = [...new Set(themes.map(t => t.category))]
   const tiles = data.map(t => `<li><button class="tile" type="button" data-slug="${t.slug}" data-category="${esc(t.category)}" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/${t.slug}.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">${esc(t.name)}</span><span class="tile-meta">${esc(t.category)}, chế độ ${t.mode === 'dark' ? 'tối' : 'sáng'}</span></span>
+<span class="tile-scene" style="background:${t.ground.light}"><img src="preview/scenes/${t.slug}.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">${esc(t.name)}</span><span class="tile-meta">${esc(t.category)}</span></span>
 </button></li>`).join('\n')
   const filters = ['Tất cả', ...categories].map((c, i) => `<button type="button" class="filter" data-filter="${i === 0 ? '' : esc(c)}" aria-pressed="${i === 0}">${esc(c)}</button>`).join('')
 
@@ -75,6 +76,9 @@ a{color:inherit}
 
 /* Try-on window: the scene under the app's frosted bands */
 .fitting{position:sticky;top:20px}
+.modes{display:flex;gap:6px;margin-bottom:10px}
+.mode{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 16px;font:500 14px var(--body);cursor:pointer}
+.mode[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
 .window{position:relative;aspect-ratio:16/10;border-radius:14px;overflow:hidden;background:#0d0f14;box-shadow:0 30px 60px -30px rgba(28,34,48,.55),0 0 0 1px rgba(28,34,48,.12)}
 .window img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .35s ease}
 .window img.fading{opacity:0}
@@ -167,12 +171,13 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px}
 
   <section class="intro">
     <h1>30 giao diện có hình nền chuyển động cho Claude Code Desktop</h1>
-    <p>Bộ giao diện dành cho Claude Code trên ứng dụng Claude Desktop. Mỗi giao diện có họa tiết riêng và tự chuyển ứng dụng sang chế độ sáng hoặc tối phù hợp với hình nền. Chọn một giao diện bên dưới để xem thử và sao chép lệnh cài.</p>
+    <p>Bộ giao diện dành cho Claude Code trên ứng dụng Claude Desktop. Mỗi giao diện có họa tiết riêng và tự sáng hoặc tối theo cài đặt giao diện của ứng dụng. Chọn một giao diện bên dưới, chuyển giữa hai chế độ để xem thử, rồi sao chép lệnh cài.</p>
   </section>
 
   <section class="studio" aria-label="Xem thử và chọn giao diện">
     <div class="fitting">
-      <div class="window" id="window" data-mode="tối" aria-hidden="true">
+      <div class="modes" role="group" aria-label="Chế độ của ứng dụng"><button type="button" class="mode" data-mode="sáng" aria-pressed="true">Sáng</button><button type="button" class="mode" data-mode="tối" aria-pressed="false">Tối</button></div>
+      <div class="window" id="window" data-mode="sáng" aria-hidden="true">
         <img id="scene" src="preview/scenes/${data[0].slug}.svg" alt="">
         <div class="bar"><i></i><i></i><i></i></div>
         <div class="chat"><span></span><span></span><span></span></div>
@@ -214,7 +219,7 @@ ${tiles}
       </li>
       <li>
         <h3>Mở một phiên mới</h3>
-        <p>Giao diện được áp dụng khi phiên mới bắt đầu. Nên chỉ để một giao diện ở trạng thái bật.</p>
+        <p>Giao diện tự bật khi phiên mới bắt đầu và tự sáng hoặc tối theo cài đặt của ứng dụng. Khi đã cài nhiều giao diện, giao diện được chọn gần nhất sẽ được giữ cho các phiên sau.</p>
       </li>
     </ol>
 
@@ -235,7 +240,7 @@ ${tiles}
   <section class="more" aria-label="Quản lý giao diện">
     <div>
       <h3>Đổi sang giao diện khác</h3>
-      <p>Tắt giao diện cũ bằng <code>claude plugin disable &lt;mã&gt;@cc-desktop-mods</code>, bật giao diện mới bằng <code>claude plugin enable &lt;mã&gt;@cc-desktop-mods</code>.</p>
+      <p>Gõ <code>giao diện &lt;tên&gt;</code> vào ô chat của một phiên mới, ví dụ <code>giao diện hồ sen</code>. Lựa chọn được ghi nhớ cho các phiên sau.</p>
     </div>
     <div>
       <h3>Cập nhật hoặc gỡ</h3>
@@ -259,6 +264,16 @@ const REPO = ${JSON.stringify(repo)}
 const $ = id => document.getElementById(id)
 const tiles = [...document.querySelectorAll('.tile')]
 
+let current = THEMES[0]
+let mode = 'sáng'
+// The window shows the look as the app would: the look's own page colour behind the scene, in the chosen mode.
+function paint() {
+  $('window').dataset.mode = mode
+  $('window').style.background = mode === 'tối' ? current.ground.dark : current.ground.light
+  document.querySelectorAll('.mode').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)))
+}
+document.querySelectorAll('.mode').forEach(b => b.addEventListener('click', () => { mode = b.dataset.mode; paint() }))
+
 function select(slug, fromUser) {
   const t = THEMES.find(x => x.slug === slug) || THEMES[0]
   const root = document.documentElement.style
@@ -269,9 +284,10 @@ function select(slug, fromUser) {
     img.classList.add('fading')
     setTimeout(() => { img.src = 'preview/scenes/' + t.slug + '.svg'; img.classList.remove('fading') }, 180)
   }
-  $('window').dataset.mode = t.mode
+  current = t
+  paint()
   $('name').textContent = t.name
-  $('metaText').textContent = t.category + ', chế độ ' + (t.mode === 'dark' ? 'tối' : 'sáng') + ', mã ' + t.slug
+  $('metaText').textContent = t.category + ', mã ' + t.slug
   $('summary').textContent = t.summary
   const cmd = 'claude plugin install ' + t.slug + '@cc-desktop-mods'
   $('installCmd').textContent = cmd

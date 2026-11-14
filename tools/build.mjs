@@ -75,8 +75,20 @@ function scene(t) {
       bodies.push(layer.body)
     }
   }
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice"><defs>${defs(t)}${extraDefs.join('')}</defs><style>${CSS.trim()}${MOTIF_CSS.trim()}</style><rect width="${W}" height="${H}" fill="url(#bg)"/>${bodies.join('')}</svg>`
+  // No ground and no vignette: the app's own page colour shows through, and it follows the person's light or
+  // dark setting. The scene can't follow it itself: light-dark(), color-scheme and @media each make the desktop
+  // draw the scene as a still image. `t.auto` recolours what reads on one ground only, as [from, to] pairs.
+  const body = bodies.join('').replaceAll(`<rect width="${W}" height="${H}" fill="url(#vig)"/>`, '')
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice"><defs>${defs(t)}${extraDefs.join('')}</defs><style>${CSS.trim()}${MOTIF_CSS.trim()}</style>${body}</svg>`
+
+  return (t.auto ?? []).reduce((s, [from, to]) => {
+    if (!s.includes(from)) throw new Error(`${t.slug}: auto colour ${from} is not in the scene`)
+    return s.replaceAll(from, to)
+  }, svg)
 }
+
+// The page colour behind the scene in each mode: the palette's surface-0.
+const grounds = t => ({ light: hsl(t.hue, t.sat * 0.4, 92), dark: hsl(t.hue, t.sat * 0.45, 7) })
 
 function lint(t, svg) {
   const style = svg.slice(svg.indexOf('<style>'), svg.indexOf('</style>'))
@@ -84,6 +96,8 @@ function lint(t, svg) {
   if (svg.length >= LIMIT) fails.push(`scene is ${svg.length} characters, limit ${LIMIT}`)
   if (style.includes('@media')) fails.push('@media in <style>')
   if (style.includes('url(')) fails.push('url() in <style>')
+  if (style.includes('light-dark(')) fails.push('light-dark() in <style>')
+  if (style.includes('color-scheme')) fails.push('color-scheme in <style>')
   if (style.slice(7).includes('<')) fails.push('< inside <style>')
   for (const bad of ['pathLength', 'animateMotion', '<image', '<text', '<script', 'foreignObject', 'xlink:href', ' on']) {
     if (bad === ' on' ? /\son[a-z]+=/i.test(svg) : svg.includes(bad)) fails.push(`contains ${bad.trim()}`)
@@ -108,12 +122,15 @@ const COMMAND = 'giao-dien-${t.slug}'
 
 const { theme, problems } = makeColors(${JSON.stringify(t.paletteInput)})
 
+// One look for both modes: the scene has no ground of its own, so the app's page colour from the palette,
+// which follows the person's light or dark setting, shows through behind it.
 const LOOK: ThemeSetArgs = {
   colors: theme,
-  // The scene is drawn for one mode only, so keep the app in that mode while the look is on.
-  overrideColorScheme: '${t.mode}',
   backdrop: { scene: SCENE_NAME, glass: ${JSON.stringify(glass)} },
 }
+
+// 'on' while this look was the last one set, 'off' once another look took over.
+const STORE_KEY = 'look'
 
 const SCENE = ${JSON.stringify(svg)}
 
@@ -125,9 +142,24 @@ export const register: Register = on => {
     if (unpainted !== undefined) {
       $.ui.toast(unpainted)
     }
-    await $.theme.set(LOOK)
+
+    // Reopen the look picked last. A look never picked yet (just installed) puts itself on; with several
+    // installed, the first to set marks the others 'off' through their theme.set hooks.
+    if ((await $.store.get(STORE_KEY)) !== 'off') {
+      await $.theme.set(LOOK)
+    }
 
     return next(e)
+  })
+
+  // Every look set in the session, this mod's or another's, passes here: remember whether it is this one.
+  on('theme.set', async ($, e, next) => {
+    const result = await next(e)
+    const scene = (e.backdrop as { scene?: string } | undefined)?.scene
+
+    await $.store.set(STORE_KEY, scene === SCENE_NAME ? 'on' : 'off')
+
+    return result
   })
 
   on('command.run', { command: COMMAND }, async $ => {
@@ -181,17 +213,18 @@ for (const t of THEMES) {
     dark: { gray: { anchors: anchorsOf(t, 'dark') } },
   }
 
+  t.ground = grounds(t)
   const svg = scene(t)
   lint(t, svg)
-  const glass = t.mode === 'dark' ? { blur: 8, opacity: 0.6 } : { blur: 8, opacity: 0.55 }
+  const glass = { blur: 3, opacity: 0.3 }
 
   const dir = join(ROOT, 'mods', t.slug)
   mkdirSync(join(dir, '.claude-plugin'), { recursive: true })
   mkdirSync(join(dir, 'hooks'), { recursive: true })
   writeFileSync(join(dir, '.claude-plugin', 'plugin.json'), JSON.stringify({
     name: t.slug,
-    version: '1.0.1',
-    description: `Giao diện ${t.name} (${t.category}, chế độ ${t.mode === 'dark' ? 'tối' : 'sáng'}): ${t.summary}`,
+    version: '1.1.0',
+    description: `Giao diện ${t.name} (${t.category}, tự sáng tối theo ứng dụng): ${t.summary}`,
     author: { name: OWNER },
     keywords: ['theme', 'giao-dien', 'claude-code-desktop'],
   }, null, 2) + '\n')
@@ -202,6 +235,11 @@ for (const t of THEMES) {
 
   mkdirSync(join(ROOT, 'preview', 'scenes'), { recursive: true })
   writeFileSync(join(ROOT, 'preview', 'scenes', `${t.slug}.svg`), svg)
+  // README card: the scene on the look's light page (left) and dark page (right), since GitHub shows it bare
+  mkdirSync(join(ROOT, 'preview', 'cards'), { recursive: true })
+  const inner = svg.slice(svg.indexOf('>') + 1, svg.lastIndexOf('</svg>'))
+  const half = x => `<svg x="${x}" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice">${inner}</svg>`
+  writeFileSync(join(ROOT, 'preview', 'cards', `${t.slug}.svg`), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W * 2} ${H}"><rect width="${W}" height="${H}" fill="${t.ground.light}"/><rect x="${W}" width="${W}" height="${H}" fill="${t.ground.dark}"/>${half(0)}${half(W)}</svg>`)
 
   entries.push({ name: t.slug, source: `./mods/${t.slug}`, description: `Giao diện ${t.name} (${t.category}): ${t.summary}` })
   gallery.push(t)
@@ -223,20 +261,21 @@ writeFileSync(join(ROOT, '.claude-plugin', 'marketplace.json'), JSON.stringify({
   plugins: entries,
 }, null, 2) + '\n')
 
-const cards = gallery.map(t => `<figure><img src="scenes/${t.slug}.svg" alt="${t.name}" loading="lazy"><figcaption><b>${t.name}</b><span>${t.category} · chế độ ${t.mode === 'dark' ? 'tối' : 'sáng'}</span><code>${t.slug}</code></figcaption></figure>`).join('\n')
+const cards = gallery.map(t => `<figure><div class="pair"><img src="scenes/${t.slug}.svg" alt="${t.name}, chế độ sáng" loading="lazy" style="background:${t.ground.light}"><img src="scenes/${t.slug}.svg" alt="${t.name}, chế độ tối" loading="lazy" style="background:${t.ground.dark}"></div><figcaption><b>${t.name}</b><span>${t.category}</span><code>${t.slug}</code></figcaption></figure>`).join('\n')
 writeFileSync(join(ROOT, 'preview', 'index.html'), `<!doctype html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Xem trước 30 giao diện</title>
 <style>
 body{margin:0;background:#0d0f14;color:#e8eaf0;font:15px/1.5 system-ui,'Segoe UI',sans-serif}
 header{padding:28px 24px 8px}h1{margin:0 0 4px;font-size:24px}p{margin:0;color:#a9b0c0}
-main{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px;padding:20px 24px 40px}
+main{display:grid;grid-template-columns:repeat(auto-fill,minmax(520px,1fr));gap:18px;padding:20px 24px 40px}
 figure{margin:0;background:#161a22;border:1px solid #232937;border-radius:14px;overflow:hidden}
+.pair{display:grid;grid-template-columns:1fr 1fr}
 img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
 figcaption{display:grid;gap:2px;padding:10px 14px 14px}figcaption span{color:#a9b0c0;font-size:13px}
 code{font-size:12px;color:#c9d2e6}
 </style></head><body>
-<header><h1>Xem trước 30 giao diện</h1><p>Hình nền chuyển động đúng như trong ứng dụng. Mã ở dòng cuối mỗi thẻ là tên dùng khi cài.</p></header>
+<header><h1>Xem trước 30 giao diện</h1><p>Mỗi thẻ hiện cùng một hình nền ở chế độ sáng (trái) và chế độ tối (phải) của ứng dụng. Mã ở dòng cuối mỗi thẻ là tên dùng khi cài.</p></header>
 <main>
 ${cards}
 </main></body></html>
@@ -250,8 +289,8 @@ try {
   const readme = readFileSync(readmePath, 'utf8')
   const groups = [...new Set(THEMES.map(t => t.category))]
   const table = groups.map(cat => {
-    const items = THEMES.filter(t => t.category === cat).map(t => `| <img src="preview/scenes/${t.slug}.svg" width="220" alt="${t.name}"> | **${t.name}**<br>\`${t.slug}\`<br>Chế độ ${t.mode === 'dark' ? 'tối' : 'sáng'} | ${t.summary} |`)
-    return [`### ${cat}`, '', '| Xem trước | Tên và mã cài đặt | Mô tả |', '|---|---|---|', ...items].join('\n')
+    const items = THEMES.filter(t => t.category === cat).map(t => `| <img src="preview/cards/${t.slug}.svg" width="320" alt="${t.name}, chế độ sáng và tối"> | **${t.name}**<br>\`${t.slug}\` | ${t.summary} |`)
+    return [`### ${cat}`, '', '| Xem trước (sáng, tối) | Tên và mã cài đặt | Mô tả |', '|---|---|---|', ...items].join('\n')
   }).join('\n\n')
   const next = readme.replace(/<!-- LIST:START -->[\s\S]*<!-- LIST:END -->/, `<!-- LIST:START -->\n${table}\n<!-- LIST:END -->`)
     .replaceAll('OWNER_NAME', OWNER)

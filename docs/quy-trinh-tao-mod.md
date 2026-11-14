@@ -9,7 +9,7 @@ Một giao diện là một plugin gồm ba phần:
 | Thành phần | Vai trò |
 |---|---|
 | Bảng màu | Màu nền, chữ, viền, màu nhấn cho chế độ sáng và tối, sinh bằng hàm `makeColors`. |
-| Cảnh nền | Một tệp SVG có chuyển động bằng CSS, hiển thị phía sau giao diện chat. |
+| Cảnh nền | Một tệp SVG trong suốt có chuyển động bằng CSS, hiển thị phía sau giao diện chat. |
 | Hook | Mã `register.tsx` áp dụng bảng màu khi mở phiên, vẽ cảnh nền và xử lý câu lệnh đổi giao diện. |
 
 Cấu trúc thư mục của một plugin:
@@ -30,7 +30,7 @@ Trước khi vẽ, chốt ba nội dung:
 
 1. **Nhóm phong cách**: sang trọng, chuyên nghiệp, dễ thương hoặc thiên nhiên.
 2. **Họa tiết chủ đạo duy nhất**: một hình ảnh trung tâm không trùng với giao diện khác (ví dụ rèm nhung và đèn sân khấu, quả địa cầu xoay, đoàn lạc đà trên đồi cát). Không dùng lại họa tiết của giao diện đã có rồi chỉ đổi màu.
-3. **Chế độ phù hợp**: thiết kế cảnh cho chế độ tối hoặc chế độ sáng. Hook đặt `overrideColorScheme` theo chế độ này, nên khi giao diện đang bật, ứng dụng luôn ở đúng chế độ của cảnh dù người dùng chọn chế độ nào. Không bỏ trường này: cảnh vẽ cho nền tối mà hiển thị ở chế độ sáng sẽ bị lớp kính màu sáng phủ lệch, giữa sáng, hai mép tối.
+3. **Dùng được ở cả hai chế độ**: cảnh nền không có màu nền riêng; phía sau là màu nền của ứng dụng (surface-0 trong bảng màu), tự đổi theo chế độ sáng hoặc tối người dùng chọn. Họa tiết phải nhìn rõ trên cả nền sáng lẫn nền tối (xem mục 4.5).
 
 ## 3. Bảng màu
 
@@ -40,7 +40,8 @@ Bảng màu sinh bằng `makeColors` từ một màu nhấn và các mốc độ
 |---|---|
 | `hue`, `sat` | Sắc độ và độ bão hòa của dải xám nền. |
 | `accent` | Màu nhấn (nút, liên kết, điểm chọn). |
-| `bg` | Các điểm màu của nền cảnh. `bgVertical: true` cho dải màu theo chiều dọc (bầu trời, mặt biển). |
+| `bg` | Các điểm màu của dải màu `#bg` trong cảnh (không còn vẽ thành nền, chỉ dùng khi họa tiết cần). `bgVertical: true` cho dải màu theo chiều dọc. |
+| `hue`, `sat` cũng quyết định màu nền của ứng dụng phía sau cảnh: | sáng `hsl(hue, sat × 0,4, 92%)`, tối `hsl(hue, sat × 0,45, 7%)`. |
 | `metal`, `glow` | Màu kim loại và màu phát sáng dùng chung trong cảnh. |
 
 Sau khi sinh, kiểm tra danh sách cảnh báo `problems`. Không được để xuất hiện dòng bắt đầu bằng "Desktop won't paint": dòng này nghĩa là ứng dụng sẽ từ chối áp dụng bảng màu.
@@ -59,13 +60,13 @@ Sau khi sinh, kiểm tra danh sách cảnh báo `problems`. Không được đ�
 
 | Được phép | Không được phép |
 |---|---|
-| Hoạt ảnh CSS `@keyframes` trên `transform`, `opacity`, `stroke-dashoffset` | Khối `@media` trong `<style>` (kể cả `prefers-color-scheme`, `prefers-reduced-motion`) |
+| Hoạt ảnh CSS `@keyframes` trên `transform`, `opacity`, `stroke-dashoffset` | Khối `@media` trong `<style>` (kể cả `prefers-color-scheme`, `prefers-reduced-motion`), hàm `light-dark()`, thuộc tính `color-scheme` |
 | `transform-box: fill-box` kèm `transform-origin` | `url(...)` bên trong `<style>` |
 | Gradient, `fill="url(#id)"` dưới dạng thuộc tính | Thuộc tính `pathLength` |
 | Nét đứt với độ dài tuyệt đối, ví dụ `stroke-dasharray: 24 1976` | Hoạt ảnh SMIL `animateMotion`, `mpath` |
 | Một thẻ `<svg>` gốc duy nhất | Thẻ `<image>`, `<text>`, thuộc tính `on*` |
 
-Bốn mục đầu ở cột "Không được phép" từng khiến toàn bộ chuyển động của cảnh bị dừng trong ứng dụng dù vẫn chạy bình thường trên trình duyệt. Luôn kiểm tra theo mục 7 thay vì chỉ xem trên trình duyệt.
+Bốn mục đầu ở cột "Không được phép" khiến ứng dụng vẽ cảnh thành ảnh tĩnh: toàn bộ chuyển động dừng dù vẫn chạy bình thường trên trình duyệt. Đã kiểm chứng ngày 14/11/2026 bằng ba bản thử của cùng một cảnh: bản không có `light-dark()` và `color-scheme` chuyển động; bản có một trong hai đứng yên. Vì vậy cảnh nền không thể tự đọc chế độ sáng, tối; việc đổi theo chế độ do màu nền của ứng dụng đảm nhận (mục 4.5). Luôn kiểm tra theo mục 7 thay vì chỉ xem trên trình duyệt.
 
 ### 4.3. Quy tắc dựng nhóm chuyển động
 
@@ -86,16 +87,24 @@ Bốn mục đầu ở cột "Không được phép" từng khiến toàn bộ c
 - Khung nhìn chuẩn `viewBox="0 0 1600 1000"` với `preserveAspectRatio="xMidYMid slice"`: cảnh luôn phủ kín cửa sổ, phần hai bên hoặc trên dưới có thể bị cắt khi tỷ lệ cửa sổ khác 16:10.
 - Thanh tiêu đề và khung soạn tin có lớp kính mờ phủ lên. Vùng hiển thị rõ nhất là hai lề trái, phải ở khoảng giữa chiều cao.
 - Giữ vùng giữa màn hình yên tĩnh để không cản trở việc đọc nội dung chat; đặt họa tiết chính ở các góc hoặc mép.
-- Độ mờ kính khuyến nghị: `blur` 6 tới 8, `opacity` 0,55 tới 0,6.
+- Độ mờ kính khuyến nghị: `blur` 3, `opacity` 0,3. Kính dày hơn làm hình nền mờ đục; mỏng hơn làm chữ khó đọc.
 - Kích thước tệp SVG dưới 131.072 ký tự.
+
+### 4.5. Một cảnh cho cả hai chế độ
+
+- Không vẽ hình chữ nhật nền hay lớp viền tối phủ toàn cảnh: bộ sinh tự bỏ `#bg` và `vignette`.
+- Kiểm tra từng cảnh trên cả hai màu nền tại `preview/index.html` (mỗi thẻ có bản sáng bên trái, bản tối bên phải).
+- Mảng lớn chỉ hợp một nền (biển đêm, đồi cát, núi, rèm, khảm): bọc lớp bằng `soft(lớp, độ_mờ)` trong `tools/themes.mjs`, thường 0,35 tới 0,75.
+- Họa tiết quá nhạt trên một nền (vàng nhạt, trắng trên nền sáng): đổi màu sang tông trung tính, trực tiếp trong tham số của lớp hoặc bằng trường `auto: [[chuỗi_cũ, chuỗi_mới]]`; bộ sinh báo lỗi khi chuỗi cũ không có trong cảnh.
+- Không dùng `overrideColorScheme`: ứng dụng desktop hiện bỏ qua trường này.
 
 ## 5. Mã hook
 
 Mã `register.tsx` thực hiện bốn việc:
 
-1. `session.start`: áp dụng bảng màu, cảnh nền và khóa chế độ bằng `$.theme.set({ colors, overrideColorScheme, backdrop: { scene, glass } })`.
-2. `command.run`: đăng ký lệnh `/giao-dien-<mã>`.
-3. `prompt.submit`: nhận cụm từ `giao diện <tên>` (đã bỏ dấu tiếng Việt), đổi giao diện và trả về `{ drop }` để cụm từ không gửi tới mô hình. Cơ chế này cần thiết vì ứng dụng không phải lúc nào cũng chuyển lệnh gạch chéo do plugin đăng ký lúc chạy.
+1. `session.start`: đăng ký lệnh, rồi áp dụng giao diện bằng `$.theme.set({ colors, backdrop: { scene, glass } })` trừ khi `$.store` ghi `off` (người dùng đã chọn giao diện khác).
+2. `theme.set`: mọi lần đặt giao diện trong phiên, của mod này hay mod khác, đều đi qua hook này; mod ghi `on` hoặc `off` vào `$.store` để nhớ giao diện chọn gần nhất. Nhờ vậy khi cài nhiều giao diện, mỗi phiên mới chỉ bật đúng giao diện vừa chọn.
+3. `command.run` và `prompt.submit`: lệnh `/giao-dien-<mã>` và cụm từ `giao diện <tên>` (đã bỏ dấu tiếng Việt) đổi giao diện; `prompt.submit` trả về `{ drop }` để cụm từ không gửi tới mô hình. Lệnh và cụm từ do plugin đăng ký lúc chạy chỉ có hiệu lực trong phiên mở sau khi cài.
 4. `ui.render` cho thành phần `Backdrop`: trả về `<Svg source={SCENE} isInteractive />` khi tên cảnh khớp.
 
 Mã mẫu được sinh tự động trong `tools/build.mjs` (hàm `registerSource`). Không sửa trực tiếp các tệp trong `mods/`; sửa nguồn rồi sinh lại.
@@ -109,7 +118,7 @@ node tools/build.mjs <tên-tài-khoản-github>
 Lệnh sinh toàn bộ thư mục `mods/`, tệp `.claude-plugin/marketplace.json`, các tệp `preview/scenes/*.svg`, trang `preview/index.html` và danh sách trong `README.md`. Trong quá trình sinh, mỗi cảnh được kiểm tra tự động; lệnh dừng với thông báo lỗi khi gặp:
 
 - tệp vượt 131.072 ký tự;
-- `@media`, `url(` hoặc ký tự `<` trong khối `<style>`;
+- `@media`, `url(`, `light-dark(`, `color-scheme` hoặc ký tự `<` trong khối `<style>`;
 - `pathLength`, `animateMotion`, `<image`, `<text`, `<script`, `foreignObject`, `xlink:href`, thuộc tính `on*`;
 - bảng màu có cảnh báo "Desktop won't paint".
 
@@ -155,6 +164,6 @@ Bước này xác nhận mã SVG qua được bộ lọc; xác nhận cuối cù
 | Một vật bị lệch khỏi vị trí khi chuyển động | Lớp hoạt ảnh gắn trên phần tử có thuộc tính `transform` | Tách thành nhóm ngoài và nhóm trong theo mục 4.3. |
 | Hình ảnh bitmap không hiện | Ứng dụng chặn mọi hình ảnh trong cảnh nền | Vẽ lại bằng vector. |
 | Bảng màu không được áp dụng | Cảnh báo "Desktop won't paint" | Điều chỉnh độ sáng nền hoặc màu nhấn, sinh lại. |
-| Lệnh `/giao-dien-...` không chạy | Ứng dụng không chuyển lệnh plugin đăng ký lúc chạy | Dùng cụm từ `giao diện <tên>`. |
-| Ở chế độ ngược lại, giữa màn hình sáng còn hai mép tối (hoặc ngược lại) | Thiếu `overrideColorScheme` | Đặt `overrideColorScheme` bằng chế độ của cảnh, tăng `version`, sinh lại. |
+| Lệnh `/giao-dien-...` hoặc cụm từ không chạy | Phiên được mở trước khi cài hoặc sửa mod; `/reload-plugins` nạp lại mã nhưng không bổ sung lệnh | Mở một phiên mới. |
+| Ở chế độ sáng, giữa sáng còn hai mép tối (hoặc ngược lại) | Cảnh còn màu nền riêng hoặc mảng lớn chỉ hợp một nền | Bỏ nền, dùng `soft` hoặc `auto` theo mục 4.5, kiểm tra lại trên `preview/index.html`. |
 | Sửa mã nhưng ứng dụng chưa nhận | Plugin chưa được nạp lại | Gõ `/reload-plugins` hoặc mở phiên mới. |

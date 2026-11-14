@@ -1,7 +1,7 @@
 {
   "name": "vuon-hoa",
-  "version": "1.0.1",
-  "description": "Giao diện Vườn hoa (Dễ thương, chế độ sáng): Hoa nhỏ đung đưa dưới đáy, bướm nhiều màu vỗ cánh bay lượn trên nền bạc hà.",
+  "version": "1.1.0",
+  "description": "Giao diện Vườn hoa (Dễ thương, tự sáng tối theo ứng dụng): Hoa nhỏ đung đưa dưới đáy, bướm nhiều màu vỗ cánh bay lượn trên nền bạc hà.",
   "author": {
     "name": "andyluu93"
   },

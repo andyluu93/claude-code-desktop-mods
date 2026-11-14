@@ -1,7 +1,7 @@
 {
   "name": "ngoc-trai",
-  "version": "1.0.1",
-  "description": "Giao diện Ngọc trai (Sang trọng, chế độ sáng): Lụa ngà uốn lượn trôi chậm, ba chuỗi ngọc trai treo đung đưa trên nền sâm panh.",
+  "version": "1.1.0",
+  "description": "Giao diện Ngọc trai (Sang trọng, tự sáng tối theo ứng dụng): Lụa ngà uốn lượn trôi chậm, ba chuỗi ngọc trai treo đung đưa trên nền sâm panh.",
   "author": {
     "name": "andyluu93"
   },

@@ -1,7 +1,7 @@
 {
   "name": "keo-ngot",
-  "version": "1.0.1",
-  "description": "Giao diện Kẹo ngọt (Dễ thương, chế độ sáng): Kẹo mút xoắn xoay tròn ở các góc, kẹo bọc giấy nhiều màu nhún nhảy.",
+  "version": "1.1.0",
+  "description": "Giao diện Kẹo ngọt (Dễ thương, tự sáng tối theo ứng dụng): Kẹo mút xoắn xoay tròn ở các góc, kẹo bọc giấy nhiều màu nhún nhảy.",
   "author": {
     "name": "andyluu93"
   },

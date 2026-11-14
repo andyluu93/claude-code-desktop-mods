@@ -1,7 +1,7 @@
 {
   "name": "rung-tre",
-  "version": "1.0.1",
-  "description": "Giao diện Rừng tre (Thiên nhiên, chế độ tối): Rừng tre đêm xanh thẫm, thân tre đung đưa hai bên, đom đóm lập lòe.",
+  "version": "1.1.0",
+  "description": "Giao diện Rừng tre (Thiên nhiên, tự sáng tối theo ứng dụng): Rừng tre đêm xanh thẫm, thân tre đung đưa hai bên, đom đóm lập lòe.",
   "author": {
     "name": "andyluu93"
   },

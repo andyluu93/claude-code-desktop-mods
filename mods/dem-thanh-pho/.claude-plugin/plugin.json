@@ -1,7 +1,7 @@
 {
   "name": "dem-thanh-pho",
-  "version": "1.0.1",
-  "description": "Giao diện Đêm thành phố (Chuyên nghiệp, chế độ tối): Ba cột đèn pha quét bầu trời tím, đường chân trời thành phố với cửa sổ sáng tắt.",
+  "version": "1.1.0",
+  "description": "Giao diện Đêm thành phố (Chuyên nghiệp, tự sáng tối theo ứng dụng): Ba cột đèn pha quét bầu trời tím, đường chân trời thành phố với cửa sổ sáng tắt.",
   "author": {
     "name": "andyluu93"
   },

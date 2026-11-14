@@ -1,7 +1,7 @@
 {
   "name": "dem-sapphire",
-  "version": "1.0.1",
-  "description": "Giao diện Đêm sapphire (Sang trọng, chế độ tối): Trăng bạc trên mặt biển xanh sapphire, vệt sáng lấp lánh trên sóng, sóng ngầm trôi chậm.",
+  "version": "1.1.0",
+  "description": "Giao diện Đêm sapphire (Sang trọng, tự sáng tối theo ứng dụng): Trăng bạc trên mặt biển xanh sapphire, vệt sáng lấp lánh trên sóng, sóng ngầm trôi chậm.",
   "author": {
     "name": "andyluu93"
   },

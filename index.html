@@ -35,6 +35,9 @@ a{color:inherit}
 
 /* Try-on window: the scene under the app's frosted bands */
 .fitting{position:sticky;top:20px}
+.modes{display:flex;gap:6px;margin-bottom:10px}
+.mode{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 16px;font:500 14px var(--body);cursor:pointer}
+.mode[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
 .window{position:relative;aspect-ratio:16/10;border-radius:14px;overflow:hidden;background:#0d0f14;box-shadow:0 30px 60px -30px rgba(28,34,48,.55),0 0 0 1px rgba(28,34,48,.12)}
 .window img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .35s ease}
 .window img.fading{opacity:0}
@@ -127,12 +130,13 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px}
 
   <section class="intro">
     <h1>30 giao diện có hình nền chuyển động cho Claude Code Desktop</h1>
-    <p>Bộ giao diện dành cho Claude Code trên ứng dụng Claude Desktop. Mỗi giao diện có họa tiết riêng và tự chuyển ứng dụng sang chế độ sáng hoặc tối phù hợp với hình nền. Chọn một giao diện bên dưới để xem thử và sao chép lệnh cài.</p>
+    <p>Bộ giao diện dành cho Claude Code trên ứng dụng Claude Desktop. Mỗi giao diện có họa tiết riêng và tự sáng hoặc tối theo cài đặt giao diện của ứng dụng. Chọn một giao diện bên dưới, chuyển giữa hai chế độ để xem thử, rồi sao chép lệnh cài.</p>
   </section>
 
   <section class="studio" aria-label="Xem thử và chọn giao diện">
     <div class="fitting">
-      <div class="window" id="window" data-mode="tối" aria-hidden="true">
+      <div class="modes" role="group" aria-label="Chế độ của ứng dụng"><button type="button" class="mode" data-mode="sáng" aria-pressed="true">Sáng</button><button type="button" class="mode" data-mode="tối" aria-pressed="false">Tối</button></div>
+      <div class="window" id="window" data-mode="sáng" aria-hidden="true">
         <img id="scene" src="preview/scenes/hoang-kim-art-deco.svg" alt="">
         <div class="bar"><i></i><i></i><i></i></div>
         <div class="chat"><span></span><span></span><span></span></div>
@@ -152,124 +156,124 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px}
       <div class="filters" role="group" aria-label="Lọc theo phong cách"><button type="button" class="filter" data-filter="" aria-pressed="true">Tất cả</button><button type="button" class="filter" data-filter="Sang trọng" aria-pressed="false">Sang trọng</button><button type="button" class="filter" data-filter="Chuyên nghiệp" aria-pressed="false">Chuyên nghiệp</button><button type="button" class="filter" data-filter="Dễ thương" aria-pressed="false">Dễ thương</button><button type="button" class="filter" data-filter="Thiên nhiên" aria-pressed="false">Thiên nhiên</button></div>
       <ul class="grid" id="grid">
 <li><button class="tile" type="button" data-slug="hoang-kim-art-deco" data-category="Sang trọng" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/hoang-kim-art-deco.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Hoàng kim Art Deco</span><span class="tile-meta">Sang trọng, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#edece8"><img src="preview/scenes/hoang-kim-art-deco.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Hoàng kim Art Deco</span><span class="tile-meta">Sang trọng</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="ngoc-luc-bao" data-category="Sang trọng" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/ngoc-luc-bao.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Ngọc lục bảo</span><span class="tile-meta">Sang trọng, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e7eeec"><img src="preview/scenes/ngoc-luc-bao.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Ngọc lục bảo</span><span class="tile-meta">Sang trọng</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="ruou-vang-nhung" data-category="Sang trọng" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/ruou-vang-nhung.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Rượu vang nhung</span><span class="tile-meta">Sang trọng, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#efe7e9"><img src="preview/scenes/ruou-vang-nhung.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Rượu vang nhung</span><span class="tile-meta">Sang trọng</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="dem-sapphire" data-category="Sang trọng" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/dem-sapphire.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Đêm sapphire</span><span class="tile-meta">Sang trọng, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e6e8ef"><img src="preview/scenes/dem-sapphire.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Đêm sapphire</span><span class="tile-meta">Sang trọng</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="da-cam-thach-den" data-category="Sang trọng" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/da-cam-thach-den.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Đá cẩm thạch đen</span><span class="tile-meta">Sang trọng, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#eaeaeb"><img src="preview/scenes/da-cam-thach-den.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Đá cẩm thạch đen</span><span class="tile-meta">Sang trọng</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="ngoc-trai" data-category="Sang trọng" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/ngoc-trai.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Ngọc trai</span><span class="tile-meta">Sang trọng, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#edebe8"><img src="preview/scenes/ngoc-trai.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Ngọc trai</span><span class="tile-meta">Sang trọng</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="nau-dat-kim" data-category="Sang trọng" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/nau-dat-kim.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Nâu đất kim</span><span class="tile-meta">Sang trọng, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#eeebe7"><img src="preview/scenes/nau-dat-kim.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Nâu đất kim</span><span class="tile-meta">Sang trọng</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="tim-hoang-gia" data-category="Sang trọng" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/tim-hoang-gia.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Tím hoàng gia</span><span class="tile-meta">Sang trọng, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#ebe7ef"><img src="preview/scenes/tim-hoang-gia.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Tím hoàng gia</span><span class="tile-meta">Sang trọng</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="xanh-doanh-nghiep" data-category="Chuyên nghiệp" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/xanh-doanh-nghiep.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Xanh doanh nghiệp</span><span class="tile-meta">Chuyên nghiệp, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e6e9ef"><img src="preview/scenes/xanh-doanh-nghiep.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Xanh doanh nghiệp</span><span class="tile-meta">Chuyên nghiệp</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="than-chi-toi-gian" data-category="Chuyên nghiệp" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/than-chi-toi-gian.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Than chì tối giản</span><span class="tile-meta">Chuyên nghiệp, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#eaeaeb"><img src="preview/scenes/than-chi-toi-gian.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Than chì tối giản</span><span class="tile-meta">Chuyên nghiệp</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="ban-ve-ky-thuat" data-category="Chuyên nghiệp" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/ban-ve-ky-thuat.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Bản vẽ kỹ thuật</span><span class="tile-meta">Chuyên nghiệp, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e5ebf0"><img src="preview/scenes/ban-ve-ky-thuat.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Bản vẽ kỹ thuật</span><span class="tile-meta">Chuyên nghiệp</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="dong-du-lieu" data-category="Chuyên nghiệp" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/dong-du-lieu.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Dòng dữ liệu</span><span class="tile-meta">Chuyên nghiệp, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e6edef"><img src="preview/scenes/dong-du-lieu.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Dòng dữ liệu</span><span class="tile-meta">Chuyên nghiệp</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="ket-noi-toan-cau" data-category="Chuyên nghiệp" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/ket-noi-toan-cau.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Kết nối toàn cầu</span><span class="tile-meta">Chuyên nghiệp, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e7e9ef"><img src="preview/scenes/ket-noi-toan-cau.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Kết nối toàn cầu</span><span class="tile-meta">Chuyên nghiệp</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="giay-trang" data-category="Chuyên nghiệp" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/giay-trang.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Giấy trắng</span><span class="tile-meta">Chuyên nghiệp, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#ecebea"><img src="preview/scenes/giay-trang.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Giấy trắng</span><span class="tile-meta">Chuyên nghiệp</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="xanh-sage" data-category="Chuyên nghiệp" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/xanh-sage.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Xanh sage thanh lịch</span><span class="tile-meta">Chuyên nghiệp, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#eaece9"><img src="preview/scenes/xanh-sage.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Xanh sage thanh lịch</span><span class="tile-meta">Chuyên nghiệp</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="dem-thanh-pho" data-category="Chuyên nghiệp" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/dem-thanh-pho.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Đêm thành phố</span><span class="tile-meta">Chuyên nghiệp, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e7e8ee"><img src="preview/scenes/dem-thanh-pho.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Đêm thành phố</span><span class="tile-meta">Chuyên nghiệp</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="keo-ngot" data-category="Dễ thương" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/keo-ngot.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Kẹo ngọt</span><span class="tile-meta">Dễ thương, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#f0e5eb"><img src="preview/scenes/keo-ngot.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Kẹo ngọt</span><span class="tile-meta">Dễ thương</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="hoa-anh-dao" data-category="Dễ thương" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/hoa-anh-dao.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Hoa anh đào</span><span class="tile-meta">Dễ thương, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#efe6e8"><img src="preview/scenes/hoa-anh-dao.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Hoa anh đào</span><span class="tile-meta">Dễ thương</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="may-bong" data-category="Dễ thương" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/may-bong.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Mây bông</span><span class="tile-meta">Dễ thương, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e5ecf0"><img src="preview/scenes/may-bong.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Mây bông</span><span class="tile-meta">Dễ thương</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="sao-dem-pastel" data-category="Dễ thương" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/sao-dem-pastel.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Sao đêm pastel</span><span class="tile-meta">Dễ thương, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e9e8ed"><img src="preview/scenes/sao-dem-pastel.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Sao đêm pastel</span><span class="tile-meta">Dễ thương</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="bien-xanh" data-category="Dễ thương" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/bien-xanh.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Biển xanh</span><span class="tile-meta">Dễ thương, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e5eef0"><img src="preview/scenes/bien-xanh.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Biển xanh</span><span class="tile-meta">Dễ thương</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="bong-bay" data-category="Dễ thương" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/bong-bay.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Bóng bay</span><span class="tile-meta">Dễ thương, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#efebe6"><img src="preview/scenes/bong-bay.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Bóng bay</span><span class="tile-meta">Dễ thương</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="vuon-hoa" data-category="Dễ thương" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/vuon-hoa.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Vườn hoa</span><span class="tile-meta">Dễ thương, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e7eeea"><img src="preview/scenes/vuon-hoa.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Vườn hoa</span><span class="tile-meta">Dễ thương</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="ho-sen" data-category="Thiên nhiên" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/ho-sen.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Hồ sen</span><span class="tile-meta">Thiên nhiên, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e7eeed"><img src="preview/scenes/ho-sen.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Hồ sen</span><span class="tile-meta">Thiên nhiên</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="rung-tre" data-category="Thiên nhiên" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/rung-tre.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Rừng tre</span><span class="tile-meta">Thiên nhiên, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e7eeea"><img src="preview/scenes/rung-tre.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Rừng tre</span><span class="tile-meta">Thiên nhiên</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="cuc-quang" data-category="Thiên nhiên" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/cuc-quang.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Cực quang</span><span class="tile-meta">Thiên nhiên, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e6ecef"><img src="preview/scenes/cuc-quang.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Cực quang</span><span class="tile-meta">Thiên nhiên</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="thien-ha" data-category="Thiên nhiên" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/thien-ha.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Thiên hà</span><span class="tile-meta">Thiên nhiên, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#eae7ee"><img src="preview/scenes/thien-ha.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Thiên hà</span><span class="tile-meta">Thiên nhiên</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="hoang-hon-sa-mac" data-category="Thiên nhiên" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/hoang-hon-sa-mac.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Hoàng hôn sa mạc</span><span class="tile-meta">Thiên nhiên, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#efe8e6"><img src="preview/scenes/hoang-hon-sa-mac.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Hoàng hôn sa mạc</span><span class="tile-meta">Thiên nhiên</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="mua-thu" data-category="Thiên nhiên" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/mua-thu.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Mùa thu</span><span class="tile-meta">Thiên nhiên, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#efebe6"><img src="preview/scenes/mua-thu.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Mùa thu</span><span class="tile-meta">Thiên nhiên</span></span>
 </button></li>
 <li><button class="tile" type="button" data-slug="dong-tuyet" data-category="Thiên nhiên" aria-pressed="false">
-<span class="tile-scene"><img src="preview/scenes/dong-tuyet.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">Đông tuyết</span><span class="tile-meta">Thiên nhiên, chế độ sáng</span></span>
+<span class="tile-scene" style="background:#e7eaee"><img src="preview/scenes/dong-tuyet.svg" alt="" loading="lazy" width="320" height="200"></span>
+<span class="tile-text"><span class="tile-name">Đông tuyết</span><span class="tile-meta">Thiên nhiên</span></span>
 </button></li>
       </ul>
     </div>
@@ -293,7 +297,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px}
       </li>
       <li>
         <h3>Mở một phiên mới</h3>
-        <p>Giao diện được áp dụng khi phiên mới bắt đầu. Nên chỉ để một giao diện ở trạng thái bật.</p>
+        <p>Giao diện tự bật khi phiên mới bắt đầu và tự sáng hoặc tối theo cài đặt của ứng dụng. Khi đã cài nhiều giao diện, giao diện được chọn gần nhất sẽ được giữ cho các phiên sau.</p>
       </li>
     </ol>
 
@@ -314,7 +318,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px}
   <section class="more" aria-label="Quản lý giao diện">
     <div>
       <h3>Đổi sang giao diện khác</h3>
-      <p>Tắt giao diện cũ bằng <code>claude plugin disable &lt;mã&gt;@cc-desktop-mods</code>, bật giao diện mới bằng <code>claude plugin enable &lt;mã&gt;@cc-desktop-mods</code>.</p>
+      <p>Gõ <code>giao diện &lt;tên&gt;</code> vào ô chat của một phiên mới, ví dụ <code>giao diện hồ sen</code>. Lựa chọn được ghi nhớ cho các phiên sau.</p>
     </div>
     <div>
       <h3>Cập nhật hoặc gỡ</h3>
@@ -333,10 +337,20 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px}
 <div class="toast" id="toast" role="status">Đã sao chép</div>
 
 <script>
-const THEMES = [{"slug":"hoang-kim-art-deco","name":"Hoàng kim Art Deco","category":"Sang trọng","mode":"tối","summary":"Sảnh Art Deco đen vàng: cột bậc thang hai bên, các chùm đèn vàng hắt lên nhấp nháy chậm.","accent":"#C9A84C","onAccent":"#1C2230","phrase":"giao diện hoàng kim art deco"},{"slug":"ngoc-luc-bao","name":"Ngọc lục bảo","category":"Sang trọng","mode":"tối","summary":"Nền khảm đa giác xanh ngọc, bốn viên ngọc lục bảo viền vàng nghiêng nhẹ và lóe sáng.","accent":"#D4B45C","onAccent":"#1C2230","phrase":"giao diện ngọc lục bảo"},{"slug":"ruou-vang-nhung","name":"Rượu vang nhung","category":"Sang trọng","mode":"tối","summary":"Sân khấu rèm nhung đỏ rượu vang lay nhẹ, tua vàng hồng đung đưa, đèn sân khấu ấm.","accent":"#D4917A","onAccent":"#FFFFFF","phrase":"giao diện rượu vang nhung"},{"slug":"dem-sapphire","name":"Đêm sapphire","category":"Sang trọng","mode":"tối","summary":"Trăng bạc trên mặt biển xanh sapphire, vệt sáng lấp lánh trên sóng, sóng ngầm trôi chậm.","accent":"#9FB4D9","onAccent":"#1C2230","phrase":"giao diện đêm sapphire"},{"slug":"da-cam-thach-den","name":"Đá cẩm thạch đen","category":"Sang trọng","mode":"tối","summary":"Cẩm thạch đen vân xám, các vết nứt hàn vàng kiểu kintsugi, ánh vàng chạy dọc vết nứt.","accent":"#C9A84C","onAccent":"#1C2230","phrase":"giao diện đá cẩm thạch đen"},{"slug":"ngoc-trai","name":"Ngọc trai","category":"Sang trọng","mode":"sáng","summary":"Lụa ngà uốn lượn trôi chậm, ba chuỗi ngọc trai treo đung đưa trên nền sâm panh.","accent":"#A8865A","onAccent":"#FFFFFF","phrase":"giao diện ngọc trai"},{"slug":"nau-dat-kim","name":"Nâu đất kim","category":"Sang trọng","mode":"tối","summary":"Nâu đất ấm và vàng kim, hoa văn gấm, hai vòng hoa văn xoay, bụi vàng bay lên.","accent":"#B8862B","onAccent":"#FFFFFF","phrase":"giao diện nâu đất kim"},{"slug":"tim-hoang-gia","name":"Tím hoàng gia","category":"Sang trọng","mode":"tối","summary":"Hai quạt lông công vươn lên từ hai góc dưới, mắt lông xanh vàng đung đưa trên nền tím.","accent":"#D4B45C","onAccent":"#1C2230","phrase":"giao diện tím hoàng gia"},{"slug":"xanh-doanh-nghiep","name":"Xanh doanh nghiệp","category":"Chuyên nghiệp","mode":"tối","summary":"Biểu đồ tăng trưởng tự vẽ dần ở hai góc dưới, vòng tròn chỉ tiêu tăng giảm, nền navy.","accent":"#4C8DF6","onAccent":"#FFFFFF","phrase":"giao diện xanh doanh nghiệp"},{"slug":"than-chi-toi-gian","name":"Than chì tối giản","category":"Chuyên nghiệp","mode":"tối","summary":"Hình khối Bauhaus mảnh trôi chậm, kim đồng hồ quay một vòng mỗi phút, điểm xanh ngọc.","accent":"#3FB8A6","onAccent":"#1C2230","phrase":"giao diện than chì tối giản"},{"slug":"ban-ve-ky-thuat","name":"Bản vẽ kỹ thuật","category":"Chuyên nghiệp","mode":"tối","summary":"Giấy bản vẽ xanh có lưới, bốn bánh răng quay ăn khớp, đường kích thước nét đứt.","accent":"#7FC4FF","onAccent":"#1C2230","phrase":"giao diện bản vẽ kỹ thuật"},{"slug":"dong-du-lieu","name":"Dòng dữ liệu","category":"Chuyên nghiệp","mode":"tối","summary":"Mưa dữ liệu xanh lam rơi dọc màn hình, các nút mạng phát sóng ở hai góc.","accent":"#2EC4D6","onAccent":"#1C2230","phrase":"giao diện dòng dữ liệu"},{"slug":"ket-noi-toan-cau","name":"Kết nối toàn cầu","category":"Chuyên nghiệp","mode":"tối","summary":"Quả địa cầu kinh tuyến xoay, vệ tinh vàng bay quanh quỹ đạo nghiêng.","accent":"#C9A84C","onAccent":"#1C2230","phrase":"giao diện kết nối toàn cầu"},{"slug":"giay-trang","name":"Giấy trắng","category":"Chuyên nghiệp","mode":"sáng","summary":"Trang giấy kẻ dòng có lề đỏ, máy bay giấy bay chéo lên kèm vệt nét đứt.","accent":"#2B4C7E","onAccent":"#FFFFFF","phrase":"giao diện giấy trắng"},{"slug":"xanh-sage","name":"Xanh sage thanh lịch","category":"Chuyên nghiệp","mode":"sáng","summary":"Những nhành bạch đàn treo từ mép trên, lá tròn xanh sage đung đưa nhẹ.","accent":"#4F7A5A","onAccent":"#FFFFFF","phrase":"giao diện xanh sage"},{"slug":"dem-thanh-pho","name":"Đêm thành phố","category":"Chuyên nghiệp","mode":"tối","summary":"Ba cột đèn pha quét bầu trời tím, đường chân trời thành phố với cửa sổ sáng tắt.","accent":"#8B7CF6","onAccent":"#FFFFFF","phrase":"giao diện đêm thành phố"},{"slug":"keo-ngot","name":"Kẹo ngọt","category":"Dễ thương","mode":"sáng","summary":"Kẹo mút xoắn xoay tròn ở các góc, kẹo bọc giấy nhiều màu nhún nhảy.","accent":"#E2589A","onAccent":"#FFFFFF","phrase":"giao diện kẹo ngọt"},{"slug":"hoa-anh-dao","name":"Hoa anh đào","category":"Dễ thương","mode":"sáng","summary":"Cành anh đào nở hoa ở hai góc, cánh hoa hồng rơi xoay trong gió.","accent":"#D9668A","onAccent":"#FFFFFF","phrase":"giao diện hoa anh đào"},{"slug":"may-bong","name":"Mây bông","category":"Dễ thương","mode":"sáng","summary":"Trời xanh pastel, mây bông trôi chậm, đàn chim nhỏ vỗ cánh bay ngang.","accent":"#3E8EDE","onAccent":"#FFFFFF","phrase":"giao diện mây bông"},{"slug":"sao-dem-pastel","name":"Sao đêm pastel","category":"Dễ thương","mode":"tối","summary":"Ngôi sao và hành tinh treo trên sợi chỉ, đung đưa như đồ chơi nôi trên nền tím đêm.","accent":"#B9A6F7","onAccent":"#1C2230","phrase":"giao diện sao đêm pastel"},{"slug":"bien-xanh","name":"Biển xanh","category":"Dễ thương","mode":"sáng","summary":"Sóng biển nhiều lớp, đàn cá nhỏ quẫy đuôi bơi ngang, bong bóng nước bay lên.","accent":"#1E9BB8","onAccent":"#FFFFFF","phrase":"giao diện biển xanh"},{"slug":"bong-bay","name":"Bóng bay","category":"Dễ thương","mode":"sáng","summary":"Nền kem ấm, bóng bay nhiều màu bay lên đung đưa, giấy kim tuyến rơi.","accent":"#E56B6F","onAccent":"#FFFFFF","phrase":"giao diện bóng bay"},{"slug":"vuon-hoa","name":"Vườn hoa","category":"Dễ thương","mode":"sáng","summary":"Hoa nhỏ đung đưa dưới đáy, bướm nhiều màu vỗ cánh bay lượn trên nền bạc hà.","accent":"#2E9E6A","onAccent":"#FFFFFF","phrase":"giao diện vườn hoa"},{"slug":"ho-sen","name":"Hồ sen","category":"Thiên nhiên","mode":"tối","summary":"Nhìn từ trên xuống mặt hồ: lá sen, hoa sen hồng, cá koi bơi vòng, gợn nước lan tỏa.","accent":"#F6A6BE","onAccent":"#1C2230","phrase":"giao diện hồ sen"},{"slug":"rung-tre","name":"Rừng tre","category":"Thiên nhiên","mode":"tối","summary":"Rừng tre đêm xanh thẫm, thân tre đung đưa hai bên, đom đóm lập lòe.","accent":"#7FCB8B","onAccent":"#1C2230","phrase":"giao diện rừng tre"},{"slug":"cuc-quang","name":"Cực quang","category":"Thiên nhiên","mode":"tối","summary":"Dải cực quang xanh tím uốn lượn trên bầu trời đêm phương Bắc, dãy núi tối.","accent":"#4FE3B0","onAccent":"#1C2230","phrase":"giao diện cực quang"},{"slug":"thien-ha","name":"Thiên hà","category":"Thiên nhiên","mode":"tối","summary":"Thiên hà xoắn ốc xoay chậm, tinh vân tím hồng, sao băng vụt qua.","accent":"#B58CFF","onAccent":"#FFFFFF","phrase":"giao diện thiên hà"},{"slug":"hoang-hon-sa-mac","name":"Hoàng hôn sa mạc","category":"Thiên nhiên","mode":"tối","summary":"Mặt trời lặn trên đồi cát, đoàn lạc đà đi chậm qua đường chân trời, cát bay theo gió.","accent":"#F08A4B","onAccent":"#1C2230","phrase":"giao diện hoàng hôn sa mạc"},{"slug":"mua-thu","name":"Mùa thu","category":"Thiên nhiên","mode":"sáng","summary":"Những luồng gió thu vẽ thành vệt cam, lá phong đỏ cam rơi xoay theo gió.","accent":"#C8602E","onAccent":"#FFFFFF","phrase":"giao diện mùa thu"},{"slug":"dong-tuyet","name":"Đông tuyết","category":"Thiên nhiên","mode":"tối","summary":"Rừng thông phủ tuyết hai lớp, tuyết rơi xoay nhẹ trên nền đêm đông xanh lạnh.","accent":"#9CC9F5","onAccent":"#1C2230","phrase":"giao diện đông tuyết"}]
+const THEMES = [{"slug":"hoang-kim-art-deco","name":"Hoàng kim Art Deco","category":"Sang trọng","ground":{"light":"#edece8","dark":"#14130f"},"summary":"Sảnh Art Deco đen vàng: cột bậc thang hai bên, các chùm đèn vàng hắt lên nhấp nháy chậm.","accent":"#C9A84C","onAccent":"#1C2230","phrase":"giao diện hoàng kim art deco"},{"slug":"ngoc-luc-bao","name":"Ngọc lục bảo","category":"Sang trọng","ground":{"light":"#e7eeec","dark":"#0e1513"},"summary":"Nền khảm đa giác xanh ngọc, bốn viên ngọc lục bảo viền vàng nghiêng nhẹ và lóe sáng.","accent":"#D4B45C","onAccent":"#1C2230","phrase":"giao diện ngọc lục bảo"},{"slug":"ruou-vang-nhung","name":"Rượu vang nhung","category":"Sang trọng","ground":{"light":"#efe7e9","dark":"#160e10"},"summary":"Sân khấu rèm nhung đỏ rượu vang lay nhẹ, tua vàng hồng đung đưa, đèn sân khấu ấm.","accent":"#D4917A","onAccent":"#FFFFFF","phrase":"giao diện rượu vang nhung"},{"slug":"dem-sapphire","name":"Đêm sapphire","category":"Sang trọng","ground":{"light":"#e6e8ef","dark":"#0d1016"},"summary":"Trăng bạc trên mặt biển xanh sapphire, vệt sáng lấp lánh trên sóng, sóng ngầm trôi chậm.","accent":"#9FB4D9","onAccent":"#1C2230","phrase":"giao diện đêm sapphire"},{"slug":"da-cam-thach-den","name":"Đá cẩm thạch đen","category":"Sang trọng","ground":{"light":"#eaeaeb","dark":"#111112"},"summary":"Cẩm thạch đen vân xám, các vết nứt hàn vàng kiểu kintsugi, ánh vàng chạy dọc vết nứt.","accent":"#C9A84C","onAccent":"#1C2230","phrase":"giao diện đá cẩm thạch đen"},{"slug":"ngoc-trai","name":"Ngọc trai","category":"Sang trọng","ground":{"light":"#edebe8","dark":"#14120f"},"summary":"Lụa ngà uốn lượn trôi chậm, ba chuỗi ngọc trai treo đung đưa trên nền sâm panh.","accent":"#A8865A","onAccent":"#FFFFFF","phrase":"giao diện ngọc trai"},{"slug":"nau-dat-kim","name":"Nâu đất kim","category":"Sang trọng","ground":{"light":"#eeebe7","dark":"#15120f"},"summary":"Nâu đất ấm và vàng kim, hoa văn gấm, hai vòng hoa văn xoay, bụi vàng bay lên.","accent":"#B8862B","onAccent":"#FFFFFF","phrase":"giao diện nâu đất kim"},{"slug":"tim-hoang-gia","name":"Tím hoàng gia","category":"Sang trọng","ground":{"light":"#ebe7ef","dark":"#130e16"},"summary":"Hai quạt lông công vươn lên từ hai góc dưới, mắt lông xanh vàng đung đưa trên nền tím.","accent":"#D4B45C","onAccent":"#1C2230","phrase":"giao diện tím hoàng gia"},{"slug":"xanh-doanh-nghiep","name":"Xanh doanh nghiệp","category":"Chuyên nghiệp","ground":{"light":"#e6e9ef","dark":"#0d1116"},"summary":"Biểu đồ tăng trưởng tự vẽ dần ở hai góc dưới, vòng tròn chỉ tiêu tăng giảm, nền navy.","accent":"#4C8DF6","onAccent":"#FFFFFF","phrase":"giao diện xanh doanh nghiệp"},{"slug":"than-chi-toi-gian","name":"Than chì tối giản","category":"Chuyên nghiệp","ground":{"light":"#eaeaeb","dark":"#111212"},"summary":"Hình khối Bauhaus mảnh trôi chậm, kim đồng hồ quay một vòng mỗi phút, điểm xanh ngọc.","accent":"#3FB8A6","onAccent":"#1C2230","phrase":"giao diện than chì tối giản"},{"slug":"ban-ve-ky-thuat","name":"Bản vẽ kỹ thuật","category":"Chuyên nghiệp","ground":{"light":"#e5ebf0","dark":"#0c1217"},"summary":"Giấy bản vẽ xanh có lưới, bốn bánh răng quay ăn khớp, đường kích thước nét đứt.","accent":"#7FC4FF","onAccent":"#1C2230","phrase":"giao diện bản vẽ kỹ thuật"},{"slug":"dong-du-lieu","name":"Dòng dữ liệu","category":"Chuyên nghiệp","ground":{"light":"#e6edef","dark":"#0d1417"},"summary":"Mưa dữ liệu xanh lam rơi dọc màn hình, các nút mạng phát sóng ở hai góc.","accent":"#2EC4D6","onAccent":"#1C2230","phrase":"giao diện dòng dữ liệu"},{"slug":"ket-noi-toan-cau","name":"Kết nối toàn cầu","category":"Chuyên nghiệp","ground":{"light":"#e7e9ef","dark":"#0e1016"},"summary":"Quả địa cầu kinh tuyến xoay, vệ tinh vàng bay quanh quỹ đạo nghiêng.","accent":"#C9A84C","onAccent":"#1C2230","phrase":"giao diện kết nối toàn cầu"},{"slug":"giay-trang","name":"Giấy trắng","category":"Chuyên nghiệp","ground":{"light":"#ecebea","dark":"#131211"},"summary":"Trang giấy kẻ dòng có lề đỏ, máy bay giấy bay chéo lên kèm vệt nét đứt.","accent":"#2B4C7E","onAccent":"#FFFFFF","phrase":"giao diện giấy trắng"},{"slug":"xanh-sage","name":"Xanh sage thanh lịch","category":"Chuyên nghiệp","ground":{"light":"#eaece9","dark":"#111310"},"summary":"Những nhành bạch đàn treo từ mép trên, lá tròn xanh sage đung đưa nhẹ.","accent":"#4F7A5A","onAccent":"#FFFFFF","phrase":"giao diện xanh sage"},{"slug":"dem-thanh-pho","name":"Đêm thành phố","category":"Chuyên nghiệp","ground":{"light":"#e7e8ee","dark":"#0e0f15"},"summary":"Ba cột đèn pha quét bầu trời tím, đường chân trời thành phố với cửa sổ sáng tắt.","accent":"#8B7CF6","onAccent":"#FFFFFF","phrase":"giao diện đêm thành phố"},{"slug":"keo-ngot","name":"Kẹo ngọt","category":"Dễ thương","ground":{"light":"#f0e5eb","dark":"#170c12"},"summary":"Kẹo mút xoắn xoay tròn ở các góc, kẹo bọc giấy nhiều màu nhún nhảy.","accent":"#E2589A","onAccent":"#FFFFFF","phrase":"giao diện kẹo ngọt"},{"slug":"hoa-anh-dao","name":"Hoa anh đào","category":"Dễ thương","ground":{"light":"#efe6e8","dark":"#170d0f"},"summary":"Cành anh đào nở hoa ở hai góc, cánh hoa hồng rơi xoay trong gió.","accent":"#D9668A","onAccent":"#FFFFFF","phrase":"giao diện hoa anh đào"},{"slug":"may-bong","name":"Mây bông","category":"Dễ thương","ground":{"light":"#e5ecf0","dark":"#0c1317"},"summary":"Trời xanh pastel, mây bông trôi chậm, đàn chim nhỏ vỗ cánh bay ngang.","accent":"#3E8EDE","onAccent":"#FFFFFF","phrase":"giao diện mây bông"},{"slug":"sao-dem-pastel","name":"Sao đêm pastel","category":"Dễ thương","ground":{"light":"#e9e8ed","dark":"#100f15"},"summary":"Ngôi sao và hành tinh treo trên sợi chỉ, đung đưa như đồ chơi nôi trên nền tím đêm.","accent":"#B9A6F7","onAccent":"#1C2230","phrase":"giao diện sao đêm pastel"},{"slug":"bien-xanh","name":"Biển xanh","category":"Dễ thương","ground":{"light":"#e5eef0","dark":"#0d1517"},"summary":"Sóng biển nhiều lớp, đàn cá nhỏ quẫy đuôi bơi ngang, bong bóng nước bay lên.","accent":"#1E9BB8","onAccent":"#FFFFFF","phrase":"giao diện biển xanh"},{"slug":"bong-bay","name":"Bóng bay","category":"Dễ thương","ground":{"light":"#efebe6","dark":"#17120d"},"summary":"Nền kem ấm, bóng bay nhiều màu bay lên đung đưa, giấy kim tuyến rơi.","accent":"#E56B6F","onAccent":"#FFFFFF","phrase":"giao diện bóng bay"},{"slug":"vuon-hoa","name":"Vườn hoa","category":"Dễ thương","ground":{"light":"#e7eeea","dark":"#0e1511"},"summary":"Hoa nhỏ đung đưa dưới đáy, bướm nhiều màu vỗ cánh bay lượn trên nền bạc hà.","accent":"#2E9E6A","onAccent":"#FFFFFF","phrase":"giao diện vườn hoa"},{"slug":"ho-sen","name":"Hồ sen","category":"Thiên nhiên","ground":{"light":"#e7eeed","dark":"#0f1514"},"summary":"Nhìn từ trên xuống mặt hồ: lá sen, hoa sen hồng, cá koi bơi vòng, gợn nước lan tỏa.","accent":"#F6A6BE","onAccent":"#1C2230","phrase":"giao diện hồ sen"},{"slug":"rung-tre","name":"Rừng tre","category":"Thiên nhiên","ground":{"light":"#e7eeea","dark":"#0f1511"},"summary":"Rừng tre đêm xanh thẫm, thân tre đung đưa hai bên, đom đóm lập lòe.","accent":"#7FCB8B","onAccent":"#1C2230","phrase":"giao diện rừng tre"},{"slug":"cuc-quang","name":"Cực quang","category":"Thiên nhiên","ground":{"light":"#e6ecef","dark":"#0d1316"},"summary":"Dải cực quang xanh tím uốn lượn trên bầu trời đêm phương Bắc, dãy núi tối.","accent":"#4FE3B0","onAccent":"#1C2230","phrase":"giao diện cực quang"},{"slug":"thien-ha","name":"Thiên hà","category":"Thiên nhiên","ground":{"light":"#eae7ee","dark":"#110e15"},"summary":"Thiên hà xoắn ốc xoay chậm, tinh vân tím hồng, sao băng vụt qua.","accent":"#B58CFF","onAccent":"#FFFFFF","phrase":"giao diện thiên hà"},{"slug":"hoang-hon-sa-mac","name":"Hoàng hôn sa mạc","category":"Thiên nhiên","ground":{"light":"#efe8e6","dark":"#16100d"},"summary":"Mặt trời lặn trên đồi cát, đoàn lạc đà đi chậm qua đường chân trời, cát bay theo gió.","accent":"#F08A4B","onAccent":"#1C2230","phrase":"giao diện hoàng hôn sa mạc"},{"slug":"mua-thu","name":"Mùa thu","category":"Thiên nhiên","ground":{"light":"#efebe6","dark":"#16120d"},"summary":"Những luồng gió thu vẽ thành vệt cam, lá phong đỏ cam rơi xoay theo gió.","accent":"#C8602E","onAccent":"#FFFFFF","phrase":"giao diện mùa thu"},{"slug":"dong-tuyet","name":"Đông tuyết","category":"Thiên nhiên","ground":{"light":"#e7eaee","dark":"#0e1115"},"summary":"Rừng thông phủ tuyết hai lớp, tuyết rơi xoay nhẹ trên nền đêm đông xanh lạnh.","accent":"#9CC9F5","onAccent":"#1C2230","phrase":"giao diện đông tuyết"}]
 const REPO = "andyluu93/claude-code-desktop-mods"
 const $ = id => document.getElementById(id)
 const tiles = [...document.querySelectorAll('.tile')]
+
+let current = THEMES[0]
+let mode = 'sáng'
+// The window shows the look as the app would: the look's own page colour behind the scene, in the chosen mode.
+function paint() {
+  $('window').dataset.mode = mode
+  $('window').style.background = mode === 'tối' ? current.ground.dark : current.ground.light
+  document.querySelectorAll('.mode').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)))
+}
+document.querySelectorAll('.mode').forEach(b => b.addEventListener('click', () => { mode = b.dataset.mode; paint() }))
 
 function select(slug, fromUser) {
   const t = THEMES.find(x => x.slug === slug) || THEMES[0]
@@ -348,9 +362,10 @@ function select(slug, fromUser) {
     img.classList.add('fading')
     setTimeout(() => { img.src = 'preview/scenes/' + t.slug + '.svg'; img.classList.remove('fading') }, 180)
   }
-  $('window').dataset.mode = t.mode
+  current = t
+  paint()
   $('name').textContent = t.name
-  $('metaText').textContent = t.category + ', chế độ ' + (t.mode === 'dark' ? 'tối' : 'sáng') + ', mã ' + t.slug
+  $('metaText').textContent = t.category + ', mã ' + t.slug
   $('summary').textContent = t.summary
   const cmd = 'claude plugin install ' + t.slug + '@cc-desktop-mods'
   $('installCmd').textContent = cmd

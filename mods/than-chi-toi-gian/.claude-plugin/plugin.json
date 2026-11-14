@@ -1,7 +1,7 @@
 {
   "name": "than-chi-toi-gian",
-  "version": "1.0.1",
-  "description": "Giao diện Than chì tối giản (Chuyên nghiệp, chế độ tối): Hình khối Bauhaus mảnh trôi chậm, kim đồng hồ quay một vòng mỗi phút, điểm xanh ngọc.",
+  "version": "1.1.0",
+  "description": "Giao diện Than chì tối giản (Chuyên nghiệp, tự sáng tối theo ứng dụng): Hình khối Bauhaus mảnh trôi chậm, kim đồng hồ quay một vòng mỗi phút, điểm xanh ngọc.",
   "author": {
     "name": "andyluu93"
   },

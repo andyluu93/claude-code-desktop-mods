@@ -1,7 +1,7 @@
 {
   "name": "xanh-sage",
-  "version": "1.0.1",
-  "description": "Giao diện Xanh sage thanh lịch (Chuyên nghiệp, chế độ sáng): Những nhành bạch đàn treo từ mép trên, lá tròn xanh sage đung đưa nhẹ.",
+  "version": "1.1.0",
+  "description": "Giao diện Xanh sage thanh lịch (Chuyên nghiệp, tự sáng tối theo ứng dụng): Những nhành bạch đàn treo từ mép trên, lá tròn xanh sage đung đưa nhẹ.",
   "author": {
     "name": "andyluu93"
   },

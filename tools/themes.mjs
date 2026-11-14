@@ -1,8 +1,16 @@
 // The 30 looks. Each one has its own signature motif and background; no two share a pattern.
 // Entry: identity, palette seeds, scene colours and the scene layers.
-// `mode` is the app appearance the scene is designed for (the palette covers both modes).
+// Every scene is drawn without a ground: the app's page colour, which follows the person's light or dark
+// setting, shows through. So each scene has to read on both a pale and a dark page: large dark or pale areas
+// are softened with `soft`, and `auto` recolours what reads on one ground only, as [from, to] pairs.
+// `mode` is the ground the scene was first drawn for; it no longer limits where the look is used.
 import * as S from './lib/svg.mjs'
 import * as M from './lib/motifs.mjs'
+
+// A whole layer at reduced opacity, so a large area shows on either ground without hiding the words.
+const soft = (layer, opacity) => typeof layer === 'string'
+  ? `<g opacity="${opacity}">${layer}</g>`
+  : { ...layer, body: `<g opacity="${opacity}">${layer.body}</g>` }
 
 const GOLD = ['#B28A22', '#E7CA62', '#C9A84C']
 
@@ -15,16 +23,17 @@ export const THEMES = [
     layers: k => [
       M.lightBeams(k(1), 7),
       M.decoPilasters('#C9A84C'),
-      S.rise(k(2), { n: 16, colors: ['#F2CF7A'], size: [0.8, 2] }),
+      S.rise(k(2), { n: 16, colors: ['#C9A84C'], size: [0.8, 2] }),
       S.vignette(),
     ],
+    auto: [['stroke="#C9A84C"', 'stroke="#B08A2E"']],
   },
   {
     slug: 'ngoc-luc-bao', name: 'Ngọc lục bảo', category: 'Sang trọng', mode: 'dark',
     summary: 'Nền khảm đa giác xanh ngọc, bốn viên ngọc lục bảo viền vàng nghiêng nhẹ và lóe sáng.',
     hue: 158, sat: 45, accent: '#D4B45C', bg: ['#03120D', '#062418', '#03100B'], metal: GOLD, glow: ['#1E8C6A', '#E7CA62'],
     layers: k => [
-      M.lowPoly(k(3), ['#04241A', '#062C20', '#083426', '#052019', '#0A3D2D', '#07301F']),
+      soft(M.lowPoly(k(3), ['#04241A', '#062C20', '#083426', '#052019', '#0A3D2D', '#07301F']), 0.35),
       M.gems(k(4), [[190, 210, 1.3], [1430, 830, 1.6], [1470, 200, 0.9], [150, 850, 0.8]]),
       S.vignette(),
     ],
@@ -45,7 +54,7 @@ export const THEMES = [
     hue: 225, sat: 55, accent: '#9FB4D9', bg: ['#02050F', '#0A1638', '#0C1A44'], bgVertical: true, metal: ['#8E9AAF', '#EEF2F8', '#B9C3D3'], glow: ['#C9D6F0', '#2A4FA8'],
     layers: k => [
       S.twinkle(k(5), { n: 34, colors: ['#EEF2F8', '#C9D6F0'], size: [0.6, 1.6], area: [0, 0, 1600, 600] }),
-      M.moonSea(k(6)),
+      soft(M.moonSea(k(6)), 0.5),
     ],
   },
   {
@@ -62,7 +71,7 @@ export const THEMES = [
     summary: 'Lụa ngà uốn lượn trôi chậm, ba chuỗi ngọc trai treo đung đưa trên nền sâm panh.',
     hue: 38, sat: 30, accent: '#A8865A', bg: ['#FBF7F0', '#EFE6D6', '#F8F3EA'], metal: ['#B8996B', '#F1DDB8', '#D2B88E'], glow: ['#FFFFFF', '#E8D5B0'], vignette: 0.1,
     layers: k => [
-      M.silkAndPearls(k(8)),
+      soft(M.silkAndPearls(k(8)), 0.35),
       S.vignette(),
     ],
   },
@@ -71,10 +80,10 @@ export const THEMES = [
     summary: 'Nâu đất ấm và vàng kim, hoa văn gấm, hai vòng hoa văn xoay, bụi vàng bay lên.',
     hue: 30, sat: 40, accent: '#B8862B', bg: ['#4A331D', '#2E1F12', '#160E08'], metal: ['#8A5F1D', '#F6DC96', '#C9973A'], glow: ['#C9973A', '#E7CA62'],
     layers: k => [
-      S.pattern('damask', '#D9A94E', 0.12),
+      S.pattern('damask', '#B8862B', 0.16),
       S.medallion({ style: 'ornate', x: 1440, y: 900, r: 430, speed: 320, opacity: 0.32 }),
       S.medallion({ style: 'ornate', x: 130, y: 110, r: 230, speed: 220, reverse: true, opacity: 0.3, delay: -5 }),
-      S.rise(k(9), { n: 30, colors: ['#F2CF7A'] }),
+      S.rise(k(9), { n: 30, colors: ['#C9973A'] }),
       S.sheen(0.05), S.vignette(),
     ],
   },
@@ -112,10 +121,11 @@ export const THEMES = [
     summary: 'Giấy bản vẽ xanh có lưới, bốn bánh răng quay ăn khớp, đường kích thước nét đứt.',
     hue: 210, sat: 70, accent: '#7FC4FF', bg: ['#08243F', '#0C3560', '#082A4A'], metal: ['#CFE6FF', '#FFFFFF', '#A8D2FF'], glow: ['#3C8DD8', '#CFE6FF'], vignette: 0.35,
     layers: () => [
-      S.pattern('blueprint', 'rgba(207,230,255,.16)', 1),
+      S.pattern('blueprint', 'rgba(80,150,220,.22)', 1),
       M.blueprintGears(),
       S.vignette(),
     ],
+    auto: [['stroke="#CFE6FF"', 'stroke="#6FA8DC"'], ['fill="#CFE6FF"', 'fill="#6FA8DC"']],
   },
   {
     slug: 'dong-du-lieu', name: 'Dòng dữ liệu', category: 'Chuyên nghiệp', mode: 'dark',
@@ -158,7 +168,7 @@ export const THEMES = [
     hue: 235, sat: 45, accent: '#8B7CF6', bg: ['#060A17', '#141B3A', '#251850'], bgVertical: true, metal: ['#8B7CF6', '#D9D2FF', '#A99CFF'], glow: ['#5B4BD6', '#2F7BFF'],
     layers: k => [
       M.searchlights(),
-      S.skyline(k(17), { body: '#0B1026', lit: '#FFD98A' }),
+      soft(S.skyline(k(17), { body: '#0B1026', lit: '#FFD98A' }), 0.6),
       S.vignette(),
     ],
   },
@@ -187,7 +197,7 @@ export const THEMES = [
     summary: 'Trời xanh pastel, mây bông trôi chậm, đàn chim nhỏ vỗ cánh bay ngang.',
     hue: 205, sat: 70, accent: '#3E8EDE', bg: ['#CFE8FF', '#E6F2FF', '#FFF4EA'], bgVertical: true, metal: ['#3E8EDE', '#A8D2FF', '#6AAAE8'], glow: ['#FFFFFF', '#FFE6C8'], vignette: 0.04,
     layers: k => [
-      S.clouds(k(20), { n: 9, color: '#FFFFFF', opacity: 0.92 }),
+      S.clouds(k(20), { n: 9, color: '#B7D3EE', opacity: 0.85 }),
       M.birds(k(21), 9),
     ],
   },
@@ -205,7 +215,7 @@ export const THEMES = [
     summary: 'Sóng biển nhiều lớp, đàn cá nhỏ quẫy đuôi bơi ngang, bong bóng nước bay lên.',
     hue: 190, sat: 65, accent: '#1E9BB8', bg: ['#EAF9FF', '#D2F1F7', '#BFEAF3'], bgVertical: true, metal: ['#1E9BB8', '#8EE3F2', '#3CB6CF'], glow: ['#FFFFFF', '#BFF0F8'], vignette: 0.04,
     layers: k => [
-      S.waves({ colors: ['#8EE3F2', '#5CCDE3', '#2FB2CF'], base: 780 }),
+      soft(S.waves({ colors: ['#8EE3F2', '#5CCDE3', '#2FB2CF'], base: 780 }), 0.7),
       M.fishSchool(k(24), 10),
       S.bubbles(k(25), { n: 14, color: '#1E9BB8', size: [5, 14] }),
     ],
@@ -256,7 +266,7 @@ export const THEMES = [
     layers: k => [
       S.twinkle(k(33), { n: 40, colors: ['#FFFFFF', '#C2FFE9'], size: [0.6, 1.5], area: [0, 0, 1600, 650] }),
       S.aurora(['#4FE3B0', '#3FB8E0', '#9B6FE0']),
-      S.mountains(['#0A1626', '#060E1A'], '#DCEBFA'),
+      soft(S.mountains(['#0A1626', '#060E1A'], '#DCEBFA'), 0.6),
     ],
   },
   {
@@ -265,7 +275,7 @@ export const THEMES = [
     hue: 265, sat: 45, accent: '#B58CFF', bg: ['#04020C', '#120A2A', '#070414'], metal: ['#B58CFF', '#FFE2F4', '#D7A8FF'], glow: ['#7B3FE0', '#E05FA8'],
     layers: k => [
       S.glowBlob(300, 760, 520, 300, 'glow2', 'floatB', 0.45),
-      S.galaxy(k(34), { x: 1200, y: 330, R: 380, colors: ['#FFFFFF', '#E5D6FF', '#FFC8E8', '#C8D8FF'] }),
+      S.galaxy(k(34), { x: 1200, y: 330, R: 380, colors: ['#B58CFF', '#E5D6FF', '#F28FC8', '#8FA8F0'] }),
       S.shootingStars(k(35), { n: 3, color: '#FFFFFF' }),
       S.vignette(),
     ],
@@ -277,7 +287,7 @@ export const THEMES = [
     layers: k => [
       S.sun(1150, 600, 90, '#FFB35C'),
       M.caravan(),
-      S.dunes(['#7A3320', '#5A2416', '#3E180F']),
+      soft(S.dunes(['#7A3320', '#5A2416', '#3E180F']), 0.65),
       S.sandDrift(k(36), { n: 30, color: '#FFD08A' }),
       S.vignette(),
     ],
@@ -296,8 +306,8 @@ export const THEMES = [
     summary: 'Rừng thông phủ tuyết hai lớp, tuyết rơi xoay nhẹ trên nền đêm đông xanh lạnh.',
     hue: 215, sat: 45, accent: '#9CC9F5', bg: ['#0A1630', '#132A50', '#1B3A66'], bgVertical: true, metal: ['#DCEBFA', '#FFFFFF', '#B9D6F5'], glow: ['#5A8BD6', '#DCEBFA'],
     layers: k => [
-      M.pineForest(k(39)),
-      S.fall(k(40), { n: 40, shapes: ['snow'], colors: ['#FFFFFF', '#DCEBFA'], scale: [0.7, 1.5], speed: [14, 26], opacity: 0.9 }),
+      soft(M.pineForest(k(39)), 0.75),
+      S.fall(k(40), { n: 40, shapes: ['snow'], colors: ['#9FC3EA', '#DCEBFA'], scale: [0.7, 1.5], speed: [14, 26], opacity: 0.9 }),
     ],
   },
 ]

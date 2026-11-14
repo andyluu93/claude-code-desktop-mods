@@ -1,7 +1,7 @@
 {
   "name": "mua-thu",
-  "version": "1.0.1",
-  "description": "Giao diện Mùa thu (Thiên nhiên, chế độ sáng): Những luồng gió thu vẽ thành vệt cam, lá phong đỏ cam rơi xoay theo gió.",
+  "version": "1.1.0",
+  "description": "Giao diện Mùa thu (Thiên nhiên, tự sáng tối theo ứng dụng): Những luồng gió thu vẽ thành vệt cam, lá phong đỏ cam rơi xoay theo gió.",
   "author": {
     "name": "andyluu93"
   },
