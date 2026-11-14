@@ -4,6 +4,8 @@ Bộ 30 giao diện có hình nền chuyển động dành cho Claude Code trên
 
 Các giao diện chia thành bốn nhóm: **Sang trọng**, **Chuyên nghiệp**, **Dễ thương** và **Thiên nhiên**. Danh sách đầy đủ kèm ảnh xem trước nằm ở cuối trang.
 
+**Xem thử và sao chép lệnh cài tại trang giới thiệu: https://andyluu93.github.io/claude-code-desktop-mods/**
+
 ## Yêu cầu
 
 - Ứng dụng Claude Desktop, sử dụng thẻ **Code** (Claude Code), phiên bản có hỗ trợ plugin giao diện.

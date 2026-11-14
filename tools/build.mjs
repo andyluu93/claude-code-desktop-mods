@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url'
 import { makeColors } from './lib/make-colors.js'
 import { CSS, defs, H, hashSeed, W } from './lib/svg.mjs'
 import { MOTIF_CSS } from './lib/motifs.mjs'
+import { siteHtml } from './site.mjs'
 import { THEMES } from './themes.mjs'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -238,6 +239,9 @@ code{font-size:12px;color:#c9d2e6}
 ${cards}
 </main></body></html>
 `)
+
+writeFileSync(join(ROOT, 'index.html'), siteHtml(THEMES, OWNER))
+writeFileSync(join(ROOT, '.nojekyll'), '')
 
 const readmePath = join(ROOT, 'README.md')
 try {
