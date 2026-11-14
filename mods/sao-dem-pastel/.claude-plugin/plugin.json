@@ -1,7 +1,7 @@
 {
   "name": "sao-dem-pastel",
-  "version": "1.0.0",
-  "description": "Giao diện Sao đêm pastel (Dễ thương, hợp chế độ tối): Ngôi sao và hành tinh treo trên sợi chỉ, đung đưa như đồ chơi nôi trên nền tím đêm.",
+  "version": "1.0.1",
+  "description": "Giao diện Sao đêm pastel (Dễ thương, chế độ tối): Ngôi sao và hành tinh treo trên sợi chỉ, đung đưa như đồ chơi nôi trên nền tím đêm.",
   "author": {
     "name": "andyluu93"
   },

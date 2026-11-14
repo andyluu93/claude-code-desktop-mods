@@ -12,6 +12,8 @@ const { theme, problems } = makeColors({"label":"Tím hoàng gia","roles":{"acce
 
 const LOOK: ThemeSetArgs = {
   colors: theme,
+  // The scene is drawn for one mode only, so keep the app in that mode while the look is on.
+  overrideColorScheme: 'dark',
   backdrop: { scene: SCENE_NAME, glass: {"blur":8,"opacity":0.6} },
 }
 

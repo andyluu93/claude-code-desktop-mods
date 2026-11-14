@@ -110,6 +110,8 @@ const { theme, problems } = makeColors(${JSON.stringify(t.paletteInput)})
 
 const LOOK: ThemeSetArgs = {
   colors: theme,
+  // The scene is drawn for one mode only, so keep the app in that mode while the look is on.
+  overrideColorScheme: '${t.mode}',
   backdrop: { scene: SCENE_NAME, glass: ${JSON.stringify(glass)} },
 }
 
@@ -188,8 +190,8 @@ for (const t of THEMES) {
   mkdirSync(join(dir, 'hooks'), { recursive: true })
   writeFileSync(join(dir, '.claude-plugin', 'plugin.json'), JSON.stringify({
     name: t.slug,
-    version: '1.0.0',
-    description: `Giao diện ${t.name} (${t.category}, hợp chế độ ${t.mode === 'dark' ? 'tối' : 'sáng'}): ${t.summary}`,
+    version: '1.0.1',
+    description: `Giao diện ${t.name} (${t.category}, chế độ ${t.mode === 'dark' ? 'tối' : 'sáng'}): ${t.summary}`,
     author: { name: OWNER },
     keywords: ['theme', 'giao-dien', 'claude-code-desktop'],
   }, null, 2) + '\n')
@@ -248,7 +250,7 @@ try {
   const readme = readFileSync(readmePath, 'utf8')
   const groups = [...new Set(THEMES.map(t => t.category))]
   const table = groups.map(cat => {
-    const items = THEMES.filter(t => t.category === cat).map(t => `| <img src="preview/scenes/${t.slug}.svg" width="220" alt="${t.name}"> | **${t.name}**<br>\`${t.slug}\`<br>Hợp chế độ ${t.mode === 'dark' ? 'tối' : 'sáng'} | ${t.summary} |`)
+    const items = THEMES.filter(t => t.category === cat).map(t => `| <img src="preview/scenes/${t.slug}.svg" width="220" alt="${t.name}"> | **${t.name}**<br>\`${t.slug}\`<br>Chế độ ${t.mode === 'dark' ? 'tối' : 'sáng'} | ${t.summary} |`)
     return [`### ${cat}`, '', '| Xem trước | Tên và mã cài đặt | Mô tả |', '|---|---|---|', ...items].join('\n')
   }).join('\n\n')
   const next = readme.replace(/<!-- LIST:START -->[\s\S]*<!-- LIST:END -->/, `<!-- LIST:START -->\n${table}\n<!-- LIST:END -->`)

@@ -12,6 +12,8 @@ const { theme, problems } = makeColors({"label":"Mùa thu","roles":{"accent":"#C
 
 const LOOK: ThemeSetArgs = {
   colors: theme,
+  // The scene is drawn for one mode only, so keep the app in that mode while the look is on.
+  overrideColorScheme: 'light',
   backdrop: { scene: SCENE_NAME, glass: {"blur":8,"opacity":0.55} },
 }
 

@@ -30,7 +30,7 @@ Trước khi vẽ, chốt ba nội dung:
 
 1. **Nhóm phong cách**: sang trọng, chuyên nghiệp, dễ thương hoặc thiên nhiên.
 2. **Họa tiết chủ đạo duy nhất**: một hình ảnh trung tâm không trùng với giao diện khác (ví dụ rèm nhung và đèn sân khấu, quả địa cầu xoay, đoàn lạc đà trên đồi cát). Không dùng lại họa tiết của giao diện đã có rồi chỉ đổi màu.
-3. **Chế độ phù hợp**: thiết kế cảnh cho chế độ tối hoặc chế độ sáng; bảng màu vẫn phải đủ cho cả hai chế độ.
+3. **Chế độ phù hợp**: thiết kế cảnh cho chế độ tối hoặc chế độ sáng. Hook đặt `overrideColorScheme` theo chế độ này, nên khi giao diện đang bật, ứng dụng luôn ở đúng chế độ của cảnh dù người dùng chọn chế độ nào. Không bỏ trường này: cảnh vẽ cho nền tối mà hiển thị ở chế độ sáng sẽ bị lớp kính màu sáng phủ lệch, giữa sáng, hai mép tối.
 
 ## 3. Bảng màu
 
@@ -93,7 +93,7 @@ Bốn mục đầu ở cột "Không được phép" từng khiến toàn bộ c
 
 Mã `register.tsx` thực hiện bốn việc:
 
-1. `session.start`: áp dụng bảng màu và cảnh nền bằng `$.theme.set({ colors, backdrop: { scene, glass } })`.
+1. `session.start`: áp dụng bảng màu, cảnh nền và khóa chế độ bằng `$.theme.set({ colors, overrideColorScheme, backdrop: { scene, glass } })`.
 2. `command.run`: đăng ký lệnh `/giao-dien-<mã>`.
 3. `prompt.submit`: nhận cụm từ `giao diện <tên>` (đã bỏ dấu tiếng Việt), đổi giao diện và trả về `{ drop }` để cụm từ không gửi tới mô hình. Cơ chế này cần thiết vì ứng dụng không phải lúc nào cũng chuyển lệnh gạch chéo do plugin đăng ký lúc chạy.
 4. `ui.render` cho thành phần `Backdrop`: trả về `<Svg source={SCENE} isInteractive />` khi tên cảnh khớp.
@@ -156,4 +156,5 @@ Bước này xác nhận mã SVG qua được bộ lọc; xác nhận cuối cù
 | Hình ảnh bitmap không hiện | Ứng dụng chặn mọi hình ảnh trong cảnh nền | Vẽ lại bằng vector. |
 | Bảng màu không được áp dụng | Cảnh báo "Desktop won't paint" | Điều chỉnh độ sáng nền hoặc màu nhấn, sinh lại. |
 | Lệnh `/giao-dien-...` không chạy | Ứng dụng không chuyển lệnh plugin đăng ký lúc chạy | Dùng cụm từ `giao diện <tên>`. |
+| Ở chế độ ngược lại, giữa màn hình sáng còn hai mép tối (hoặc ngược lại) | Thiếu `overrideColorScheme` | Đặt `overrideColorScheme` bằng chế độ của cảnh, tăng `version`, sinh lại. |
 | Sửa mã nhưng ứng dụng chưa nhận | Plugin chưa được nạp lại | Gõ `/reload-plugins` hoặc mở phiên mới. |

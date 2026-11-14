@@ -34,7 +34,7 @@ export function siteHtml(themes, owner) {
   const categories = [...new Set(themes.map(t => t.category))]
   const tiles = data.map(t => `<li><button class="tile" type="button" data-slug="${t.slug}" data-category="${esc(t.category)}" aria-pressed="false">
 <span class="tile-scene"><img src="preview/scenes/${t.slug}.svg" alt="" loading="lazy" width="320" height="200"></span>
-<span class="tile-text"><span class="tile-name">${esc(t.name)}</span><span class="tile-meta">${esc(t.category)}, chế độ ${t.mode}</span></span>
+<span class="tile-text"><span class="tile-name">${esc(t.name)}</span><span class="tile-meta">${esc(t.category)}, chế độ ${t.mode === 'dark' ? 'tối' : 'sáng'}</span></span>
 </button></li>`).join('\n')
   const filters = ['Tất cả', ...categories].map((c, i) => `<button type="button" class="filter" data-filter="${i === 0 ? '' : esc(c)}" aria-pressed="${i === 0}">${esc(c)}</button>`).join('')
 
@@ -167,7 +167,7 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:14px}
 
   <section class="intro">
     <h1>30 giao diện có hình nền chuyển động cho Claude Code Desktop</h1>
-    <p>Bộ giao diện dành cho Claude Code trên ứng dụng Claude Desktop. Mỗi giao diện có họa tiết riêng và bảng màu đầy đủ cho chế độ sáng, tối. Chọn một giao diện bên dưới để xem thử và sao chép lệnh cài.</p>
+    <p>Bộ giao diện dành cho Claude Code trên ứng dụng Claude Desktop. Mỗi giao diện có họa tiết riêng và tự chuyển ứng dụng sang chế độ sáng hoặc tối phù hợp với hình nền. Chọn một giao diện bên dưới để xem thử và sao chép lệnh cài.</p>
   </section>
 
   <section class="studio" aria-label="Xem thử và chọn giao diện">
@@ -271,7 +271,7 @@ function select(slug, fromUser) {
   }
   $('window').dataset.mode = t.mode
   $('name').textContent = t.name
-  $('metaText').textContent = t.category + ', hợp chế độ ' + t.mode + ', mã ' + t.slug
+  $('metaText').textContent = t.category + ', chế độ ' + (t.mode === 'dark' ? 'tối' : 'sáng') + ', mã ' + t.slug
   $('summary').textContent = t.summary
   const cmd = 'claude plugin install ' + t.slug + '@cc-desktop-mods'
   $('installCmd').textContent = cmd

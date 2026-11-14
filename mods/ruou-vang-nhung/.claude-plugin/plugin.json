@@ -1,7 +1,7 @@
 {
   "name": "ruou-vang-nhung",
-  "version": "1.0.0",
-  "description": "Giao diện Rượu vang nhung (Sang trọng, hợp chế độ tối): Sân khấu rèm nhung đỏ rượu vang lay nhẹ, tua vàng hồng đung đưa, đèn sân khấu ấm.",
+  "version": "1.0.1",
+  "description": "Giao diện Rượu vang nhung (Sang trọng, chế độ tối): Sân khấu rèm nhung đỏ rượu vang lay nhẹ, tua vàng hồng đung đưa, đèn sân khấu ấm.",
   "author": {
     "name": "andyluu93"
   },

@@ -1,7 +1,7 @@
 {
   "name": "ban-ve-ky-thuat",
-  "version": "1.0.0",
-  "description": "Giao diện Bản vẽ kỹ thuật (Chuyên nghiệp, hợp chế độ tối): Giấy bản vẽ xanh có lưới, bốn bánh răng quay ăn khớp, đường kích thước nét đứt.",
+  "version": "1.0.1",
+  "description": "Giao diện Bản vẽ kỹ thuật (Chuyên nghiệp, chế độ tối): Giấy bản vẽ xanh có lưới, bốn bánh răng quay ăn khớp, đường kích thước nét đứt.",
   "author": {
     "name": "andyluu93"
   },

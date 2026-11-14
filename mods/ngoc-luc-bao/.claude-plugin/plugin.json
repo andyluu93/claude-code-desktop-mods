@@ -1,7 +1,7 @@
 {
   "name": "ngoc-luc-bao",
-  "version": "1.0.0",
-  "description": "Giao diện Ngọc lục bảo (Sang trọng, hợp chế độ tối): Nền khảm đa giác xanh ngọc, bốn viên ngọc lục bảo viền vàng nghiêng nhẹ và lóe sáng.",
+  "version": "1.0.1",
+  "description": "Giao diện Ngọc lục bảo (Sang trọng, chế độ tối): Nền khảm đa giác xanh ngọc, bốn viên ngọc lục bảo viền vàng nghiêng nhẹ và lóe sáng.",
   "author": {
     "name": "andyluu93"
   },
