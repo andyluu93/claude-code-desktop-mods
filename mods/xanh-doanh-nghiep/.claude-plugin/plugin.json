@@ -1,0 +1,13 @@
+{
+  "name": "xanh-doanh-nghiep",
+  "version": "1.0.0",
+  "description": "Giao diện Xanh doanh nghiệp (Chuyên nghiệp, hợp chế độ tối): Biểu đồ tăng trưởng tự vẽ dần ở hai góc dưới, vòng tròn chỉ tiêu tăng giảm, nền navy.",
+  "author": {
+    "name": "andyluu93"
+  },
+  "keywords": [
+    "theme",
+    "giao-dien",
+    "claude-code-desktop"
+  ]
+}

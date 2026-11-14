@@ -1,0 +1,13 @@
+{
+  "name": "than-chi-toi-gian",
+  "version": "1.0.0",
+  "description": "Giao diện Than chì tối giản (Chuyên nghiệp, hợp chế độ tối): Hình khối Bauhaus mảnh trôi chậm, kim đồng hồ quay một vòng mỗi phút, điểm xanh ngọc.",
+  "author": {
+    "name": "andyluu93"
+  },
+  "keywords": [
+    "theme",
+    "giao-dien",
+    "claude-code-desktop"
+  ]
+}

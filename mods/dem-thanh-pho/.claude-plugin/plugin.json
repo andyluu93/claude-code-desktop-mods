@@ -1,0 +1,13 @@
+{
+  "name": "dem-thanh-pho",
+  "version": "1.0.0",
+  "description": "Giao diện Đêm thành phố (Chuyên nghiệp, hợp chế độ tối): Ba cột đèn pha quét bầu trời tím, đường chân trời thành phố với cửa sổ sáng tắt.",
+  "author": {
+    "name": "andyluu93"
+  },
+  "keywords": [
+    "theme",
+    "giao-dien",
+    "claude-code-desktop"
+  ]
+}

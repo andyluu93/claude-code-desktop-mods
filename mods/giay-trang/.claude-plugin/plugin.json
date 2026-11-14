@@ -1,0 +1,13 @@
+{
+  "name": "giay-trang",
+  "version": "1.0.0",
+  "description": "Giao diện Giấy trắng (Chuyên nghiệp, hợp chế độ sáng): Trang giấy kẻ dòng có lề đỏ, máy bay giấy bay chéo lên kèm vệt nét đứt.",
+  "author": {
+    "name": "andyluu93"
+  },
+  "keywords": [
+    "theme",
+    "giao-dien",
+    "claude-code-desktop"
+  ]
+}

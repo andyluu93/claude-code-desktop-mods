@@ -1,0 +1,50 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Scrub check</title>
+<!-- Runs every scene through the same DOMPurify settings the desktop app uses for a backdrop Svg,
+     then mounts the result and counts the running CSS animations. Serve the repo root over http. -->
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+<body style="margin:0;background:#111;color:#eee;font:13px monospace">
+<pre id="out" style="padding:8px"></pre>
+<div id="stage" style="position:fixed;right:0;bottom:0;width:320px;height:200px;opacity:.01;pointer-events:none"></div>
+<script>
+const ADD_TAGS = ['animate', 'set', 'use']
+const FORBID_TAGS = ['script', 'foreignObject', 'image', 'a', 'iframe']
+const ADD_ATTR = ['from', 'to', 'calcMode']
+function keepAttr(name, value) {
+  if (name.startsWith('on')) return false
+  if (name === 'href' || name === 'xlink:href') return value.trim().startsWith('#')
+  if (name !== 'attributename') return true
+  const t = value.trim().toLowerCase().split(':').at(-1) ?? ''
+  return t !== '' && t !== 'href' && !t.startsWith('on')
+}
+function scrub(source) {
+  const p = DOMPurify(window)
+  p.addHook('uponSanitizeAttribute', (_n, a) => { if (!keepAttr(a.attrName, a.attrValue)) a.keepAttr = false })
+  const nodes = Array.from(p.sanitize(source, { USE_PROFILES: { svg: true, svgFilters: true }, ADD_TAGS, ADD_ATTR, FORBID_TAGS, ALLOW_DATA_ATTR: false, ALLOW_UNKNOWN_PROTOCOLS: false, FORCE_BODY: true, RETURN_DOM_FRAGMENT: true }).childNodes)
+    .filter(n => n.nodeType !== Node.TEXT_NODE || n.textContent?.trim())
+  return nodes.length === 1 && nodes[0].localName === 'svg' ? nodes[0].outerHTML : null
+}
+;(async () => {
+  const out = document.getElementById('out')
+  const stage = document.getElementById('stage')
+  const market = await (await fetch('../.claude-plugin/marketplace.json')).json()
+  const results = []
+  for (const { name } of market.plugins) {
+    const raw = await (await fetch(`../preview/scenes/${name}.svg`)).text()
+    const clean = scrub(raw)
+    let anims = 0
+    if (clean) {
+      stage.innerHTML = clean
+      await new Promise(r => setTimeout(r, 150))
+      anims = stage.firstElementChild.getAnimations({ subtree: true }).filter(a => a.playState === 'running').length
+    }
+    const kept = clean ? clean.length / raw.length : 0
+    const ok = clean !== null && anims > 0 && clean.includes('@keyframes')
+    results.push({ name, ok, anims, kept: kept.toFixed(2) })
+    out.textContent += `${ok ? 'OK  ' : 'FAIL'} ${name.padEnd(22)} animations ${String(anims).padStart(4)}  kept ${kept.toFixed(2)}\n`
+  }
+  window.scrubResults = results
+  out.textContent += `\n${results.filter(r => r.ok).length}/${results.length} pass`
+})()
+</script>

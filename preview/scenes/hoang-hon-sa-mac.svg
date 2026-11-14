@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A0F1A"/><stop offset="0.5" stop-color="#6A2A22"/><stop offset="1" stop-color="#C2552E"/></linearGradient>
+<linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F08A4B"/><stop offset=".5" stop-color="#FFD08A"/><stop offset="1" stop-color="#F7A35C"/></linearGradient>
+<radialGradient id="glow"><stop offset="0" stop-color="#FFB35C" stop-opacity=".55"/><stop offset="1" stop-color="#FFB35C" stop-opacity="0"/></radialGradient>
+<radialGradient id="glow2"><stop offset="0" stop-color="#FF6B4A" stop-opacity=".45"/><stop offset="1" stop-color="#FF6B4A" stop-opacity="0"/></radialGradient>
+<radialGradient id="spark"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/><stop offset=".35" stop-color="#FFD08A" stop-opacity=".6"/><stop offset="1" stop-color="#FFD08A" stop-opacity="0"/></radialGradient>
+<radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.3"/></radialGradient>
+<linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset=".5" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient></defs><style>.fb{transform-box:fill-box;transform-origin:center}
+.ob{transform-box:fill-box;transform-origin:center bottom}
+.ot{transform-box:fill-box;transform-origin:center top}
+.spin{animation:spin 300s linear infinite}
+.spinr{animation:spinr 300s linear infinite}
+.glint{animation:glint 12s ease-in-out infinite}
+.pulse{animation:pulse 6s ease-in-out infinite}
+.tw{opacity:0;animation:tw 5s ease-in-out infinite}
+.rise{opacity:0;animation:rise 20s linear infinite}
+.riseFar{opacity:0;animation:riseFar 24s linear infinite}
+.balloon{animation:balloon 26s linear infinite}
+.fall{animation:fall 18s linear infinite}
+.spinp{animation:spin 6s linear infinite}
+.sway{animation:sway 7s ease-in-out infinite}
+.bob{animation:bob 4s ease-in-out infinite}
+.floatA{animation:floatA 28s ease-in-out infinite}
+.floatB{animation:floatB 34s ease-in-out infinite}
+.drift{animation:drift 90s linear infinite}
+.sand{opacity:0;animation:sand 14s linear infinite}
+.wave{animation:wave 14s linear infinite}
+.grow{animation:grow 5s ease-in-out infinite}
+.flick{animation:flick 7s steps(1) infinite}
+.ripple{opacity:0;animation:ripple 4s ease-out infinite}
+.comet{fill:none;stroke-linecap:round;stroke-dasharray:24 1976;animation:comet 6s linear infinite}
+.shoot{fill:none;stroke-linecap:round;stroke-dasharray:90 3000;animation:shoot 9s ease-in infinite}
+.aurA{animation:aurA 16s ease-in-out infinite}
+.aurB{animation:aurB 21s ease-in-out infinite}
+.sweep{animation:sweep 22s ease-in-out infinite}
+.firefly{opacity:0;animation:firefly 9s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinr{to{transform:rotate(-360deg)}}
+@keyframes glint{0%,100%{opacity:.7}50%{opacity:1}}
+@keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes tw{0%,100%{opacity:0;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+@keyframes rise{0%{transform:translateY(0);opacity:0}15%{opacity:.85}85%{opacity:.5}100%{transform:translateY(-620px);opacity:0}}
+@keyframes riseFar{0%{transform:translateY(0);opacity:0}10%{opacity:.8}90%{opacity:.6}100%{transform:translateY(-1150px);opacity:0}}
+@keyframes balloon{0%{transform:translate(0,0)}25%{transform:translate(18px,-300px)}50%{transform:translate(-12px,-600px)}75%{transform:translate(14px,-900px)}100%{transform:translate(0,-1250px)}}
+@keyframes fall{0%{transform:translate(0,0)}25%{transform:translate(45px,280px)}50%{transform:translate(-25px,560px)}75%{transform:translate(40px,840px)}100%{transform:translate(10px,1120px)}}
+@keyframes sway{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes floatA{0%,100%{transform:translate(0,0)}50%{transform:translate(220px,120px)}}
+@keyframes floatB{0%,100%{transform:translate(0,0)}50%{transform:translate(-240px,-110px)}}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(2300px)}}
+@keyframes sand{0%{transform:translate(0,0);opacity:0}15%{opacity:.7}85%{opacity:.4}100%{transform:translate(-420px,-40px);opacity:0}}
+@keyframes wave{from{transform:translateX(0)}to{transform:translateX(-800px)}}
+@keyframes grow{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+@keyframes flick{0%,100%{opacity:.95}40%{opacity:.25}55%{opacity:.95}80%{opacity:.4}}
+@keyframes ripple{0%{opacity:.8;transform:scale(.3)}100%{opacity:0;transform:scale(2.4)}}
+@keyframes comet{from{stroke-dashoffset:2000}to{stroke-dashoffset:0}}
+@keyframes shoot{0%{stroke-dashoffset:90}12%{stroke-dashoffset:-330}100%{stroke-dashoffset:-330}}
+@keyframes aurA{0%,100%{transform:translateX(0) scaleY(1);opacity:.7}50%{transform:translateX(120px) scaleY(1.15);opacity:1}}
+@keyframes aurB{0%,100%{transform:translateX(0) scaleY(1.1);opacity:.85}50%{transform:translateX(-140px) scaleY(.9);opacity:.55}}
+@keyframes sweep{0%{transform:translateX(-1900px)}60%,100%{transform:translateX(1900px)}}
+@keyframes firefly{0%,100%{opacity:0;transform:translate(0,0)}30%{opacity:1}50%{opacity:.6;transform:translate(30px,-40px)}70%{opacity:1}}.beam{animation:beam 7s ease-in-out infinite}
+.tilt{animation:tilt 9s ease-in-out infinite}
+.flash{opacity:0;animation:flash 6s ease-in-out infinite}
+.billow{animation:billow 9s ease-in-out infinite}
+.draw{fill:none;stroke-dasharray:2000 2000;animation:draw 12s ease-in-out infinite}
+.donut{fill:none;stroke-dasharray:999 999;animation:donut 10s ease-in-out infinite}
+.meridian{animation:meridian 12s linear infinite}
+.rain{animation:rain 9s linear infinite}
+.plane{animation:plane 26s linear infinite}
+.trail{animation:trail 1.6s linear infinite}
+.search{animation:search 10s ease-in-out infinite}
+.flap{animation:flap .9s ease-in-out infinite}
+.wing{animation:wing .5s ease-in-out infinite}
+.fly{animation:fly 30s linear infinite}
+.flutter{animation:flutter 24s ease-in-out infinite}
+.swim{animation:swim 34s linear infinite}
+.tail{animation:tail 1.2s ease-in-out infinite}
+.orbit{animation:spin 40s linear infinite}
+.swing{animation:swing 5s ease-in-out infinite}
+.gust{fill:none;stroke-dasharray:160 1840;animation:gust 7s linear infinite}
+.shimmer{opacity:.2;animation:shimmer 3s ease-in-out infinite}
+.walk{animation:walk 120s linear infinite}
+@keyframes beam{0%,100%{opacity:.25;transform:scaleY(.82)}50%{opacity:.7;transform:scaleY(1)}}
+@keyframes tilt{0%,100%{transform:rotate(-6deg) translateY(0)}50%{transform:rotate(6deg) translateY(-14px)}}
+@keyframes flash{0%,70%,100%{opacity:0;transform:scale(.4)}80%{opacity:1;transform:scale(1.2)}}
+@keyframes billow{0%,100%{transform:skewX(0deg) scaleX(1)}50%{transform:skewX(1.4deg) scaleX(1.03)}}
+@keyframes draw{0%{stroke-dashoffset:2000;opacity:1}45%,80%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes donut{0%,100%{stroke-dashoffset:999}50%{stroke-dashoffset:260}}
+@keyframes meridian{0%{transform:scaleX(1)}25%{transform:scaleX(0)}50%{transform:scaleX(-1)}75%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+@keyframes rain{from{transform:translateY(0)}to{transform:translateY(1300px)}}
+@keyframes plane{0%{transform:translate(0,0)}100%{transform:translate(2300px,-620px)}}
+@keyframes trail{to{stroke-dashoffset:-28}}
+@keyframes search{0%,100%{transform:rotate(-24deg)}50%{transform:rotate(24deg)}}
+@keyframes flap{0%,100%{transform:scaleY(1)}50%{transform:scaleY(-.6)}}
+@keyframes wing{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.25)}}
+@keyframes fly{0%{transform:translate(0,0)}100%{transform:translate(2200px,-160px)}}
+@keyframes flutter{0%{transform:translate(0,0)}25%{transform:translate(380px,-120px)}50%{transform:translate(760px,40px)}75%{transform:translate(1140px,-90px)}100%{transform:translate(1900px,10px)}}
+@keyframes swim{0%{transform:translate(0,0)}50%{transform:translate(1100px,-40px)}100%{transform:translate(2200px,0)}}
+@keyframes tail{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
+@keyframes swing{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes gust{from{stroke-dashoffset:2000}to{stroke-dashoffset:0}}
+@keyframes shimmer{0%,100%{opacity:.15}50%{opacity:.85}}
+@keyframes walk{from{transform:translateX(0)}to{transform:translateX(-2100px)}}</style><rect width="1600" height="1000" fill="url(#bg)"/><g opacity=".8"><g class="pulse"><circle cx="1150" cy="600" r="288" fill="url(#glow)"/></g></g><g transform="translate(1150 600)" opacity=".55"><g class="spin fb" style="animation-duration:120s"><path d="M112.5,0L144,0" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M108.7,29.1L139.1,37.3" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M97.4,56.2L124.7,72" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M79.5,79.5L101.8,101.8" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M56.3,97.4L72,124.7" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M29.1,108.7L37.3,139.1" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M0,112.5L0,144" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M-29.1,108.7L-37.3,139.1" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M-56.2,97.4L-72,124.7" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M-79.5,79.5L-101.8,101.8" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M-97.4,56.2L-124.7,72" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M-108.7,29.1L-139.1,37.3" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M-112.5,0L-144,0" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M-108.7,-29.1L-139.1,-37.3" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M-97.4,-56.3L-124.7,-72" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M-79.5,-79.5L-101.8,-101.8" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M-56.3,-97.4L-72,-124.7" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M-29.1,-108.7L-37.3,-139.1" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M0,-112.5L0,-144" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M29.1,-108.7L37.3,-139.1" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M56.3,-97.4L72,-124.7" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M79.5,-79.5L101.8,-101.8" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M97.4,-56.3L124.7,-72" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/><path d="M108.7,-29.1L139.1,-37.3" stroke="#FFB35C" stroke-width="4" stroke-linecap="round"/></g></g><circle cx="1150" cy="600" r="90" fill="#FFB35C"/><path d="M0 1000V612C300 606 700 616 1000 610S1450 606 1600 612V1000Z" fill="#8A3A24"/><g transform="translate(1700 578)"><g class="walk" style="animation-duration:140s;animation-delay:-70s"><g transform="scale(1.15)"><g transform="translate(0 0)"><path d="M0 0C10-30 30-34 40-20C48-40 64-40 70-20L80-30L88-26L80-6L70 0L68 30H62L60 4H20L18 30H12L10 2Z" fill="#2A1009"/></g><g transform="translate(110 0)"><path d="M0 0C10-30 30-34 40-20C48-40 64-40 70-20L80-30L88-26L80-6L70 0L68 30H62L60 4H20L18 30H12L10 2Z" fill="#2A1009"/></g><g transform="translate(220 0)"><path d="M0 0C10-30 30-34 40-20C48-40 64-40 70-20L80-30L88-26L80-6L70 0L68 30H62L60 4H20L18 30H12L10 2Z" fill="#2A1009"/></g></g></g></g><path d="M0 1000V700C200 640 420 650 600 700C800 755 1000 690 1200 660C1380 635 1500 650 1600 670V1000Z" fill="#7A3320"/><path d="M0 1000V800C180 760 380 770 560 805C760 845 960 800 1160 770C1340 745 1480 760 1600 780V1000Z" fill="#5A2416"/><path d="M0 1000V890C220 860 420 880 640 900C860 920 1080 880 1300 870C1440 865 1540 875 1600 880V1000Z" fill="#3E180F"/><circle class="sand" cx="1289.8" cy="698.3" r="1.4" fill="#FFD08A" style="animation-duration:10.3s;animation-delay:-9s"/><circle class="sand" cx="1573" cy="777.3" r="1.2" fill="#FFD08A" style="animation-duration:12.6s;animation-delay:-10.1s"/><circle class="sand" cx="1356.6" cy="687.8" r="1.9" fill="#FFD08A" style="animation-duration:10.1s;animation-delay:-7.4s"/><circle class="sand" cx="1008.3" cy="935.5" r="1.5" fill="#FFD08A" style="animation-duration:9.2s;animation-delay:-6.8s"/><circle class="sand" cx="1383.7" cy="901.1" r="1.9" fill="#FFD08A" style="animation-duration:15.8s;animation-delay:-0.2s"/><circle class="sand" cx="479" cy="760.4" r="1.9" fill="#FFD08A" style="animation-duration:12.5s;animation-delay:-8.3s"/><circle class="sand" cx="1294" cy="759.6" r="1.6" fill="#FFD08A" style="animation-duration:15.1s;animation-delay:-10.6s"/><circle class="sand" cx="1336.5" cy="934.3" r="1.5" fill="#FFD08A" style="animation-duration:12.8s;animation-delay:-9.7s"/><circle class="sand" cx="1626.8" cy="944.1" r="2.2" fill="#FFD08A" style="animation-duration:10.3s;animation-delay:-0.8s"/><circle class="sand" cx="510.6" cy="740.7" r="1.6" fill="#FFD08A" style="animation-duration:14.4s;animation-delay:-9.5s"/><circle class="sand" cx="1306.2" cy="741.5" r="2.2" fill="#FFD08A" style="animation-duration:10.8s;animation-delay:-10.7s"/><circle class="sand" cx="210.8" cy="948.2" r="1.4" fill="#FFD08A" style="animation-duration:12.1s;animation-delay:-5.7s"/><circle class="sand" cx="1101.8" cy="659" r="1.4" fill="#FFD08A" style="animation-duration:16.4s;animation-delay:-14.5s"/><circle class="sand" cx="386.4" cy="703.7" r="1.5" fill="#FFD08A" style="animation-duration:10.5s;animation-delay:-0.5s"/><circle class="sand" cx="260.7" cy="837.5" r="1.1" fill="#FFD08A" style="animation-duration:11.3s;animation-delay:-6.2s"/><circle class="sand" cx="702.3" cy="960.4" r="0.9" fill="#FFD08A" style="animation-duration:10.6s;animation-delay:-0.3s"/><circle class="sand" cx="1655.3" cy="767.3" r="1" fill="#FFD08A" style="animation-duration:14.6s;animation-delay:-3.7s"/><circle class="sand" cx="1074.9" cy="659.5" r="2" fill="#FFD08A" style="animation-duration:17.4s;animation-delay:-3s"/><circle class="sand" cx="1267" cy="689.6" r="0.9" fill="#FFD08A" style="animation-duration:18s;animation-delay:-1.5s"/><circle class="sand" cx="901.7" cy="665.8" r="1.4" fill="#FFD08A" style="animation-duration:18s;animation-delay:-3.1s"/><circle class="sand" cx="500.3" cy="875.6" r="2" fill="#FFD08A" style="animation-duration:9.4s;animation-delay:-6.6s"/><circle class="sand" cx="1242.2" cy="947" r="1.2" fill="#FFD08A" style="animation-duration:9s;animation-delay:-5.9s"/><circle class="sand" cx="1035.7" cy="652.9" r="1.8" fill="#FFD08A" style="animation-duration:14.8s;animation-delay:-13.1s"/><circle class="sand" cx="1322.2" cy="913.9" r="1.5" fill="#FFD08A" style="animation-duration:9.2s;animation-delay:-1s"/><circle class="sand" cx="784.6" cy="942.5" r="1.3" fill="#FFD08A" style="animation-duration:9.7s;animation-delay:-2.7s"/><circle class="sand" cx="1566.9" cy="954.8" r="1.1" fill="#FFD08A" style="animation-duration:15.7s;animation-delay:-15.2s"/><circle class="sand" cx="1342.1" cy="713.3" r="0.9" fill="#FFD08A" style="animation-duration:16.4s;animation-delay:-12.6s"/><circle class="sand" cx="882.1" cy="914.8" r="2.2" fill="#FFD08A" style="animation-duration:13.3s;animation-delay:-9.8s"/><circle class="sand" cx="1242.7" cy="780.8" r="2.2" fill="#FFD08A" style="animation-duration:10.1s;animation-delay:-2.2s"/><circle class="sand" cx="320" cy="833.8" r="1.6" fill="#FFD08A" style="animation-duration:15.5s;animation-delay:-11.1s"/><rect width="1600" height="1000" fill="url(#vig)"/></svg>

@@ -1,0 +1,13 @@
+{
+  "name": "mua-thu",
+  "version": "1.0.0",
+  "description": "Giao diện Mùa thu (Thiên nhiên, hợp chế độ sáng): Những luồng gió thu vẽ thành vệt cam, lá phong đỏ cam rơi xoay theo gió.",
+  "author": {
+    "name": "andyluu93"
+  },
+  "keywords": [
+    "theme",
+    "giao-dien",
+    "claude-code-desktop"
+  ]
+}

@@ -1,0 +1,9 @@
+_backup/
+node_modules/
+**/.claude-plugin/types/
+.env
+.env.*
+*.log
+.DS_Store
+desktop.ini
+Thumbs.db

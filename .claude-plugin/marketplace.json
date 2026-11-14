@@ -1,0 +1,161 @@
+{
+  "name": "cc-desktop-mods",
+  "owner": {
+    "name": "andyluu93"
+  },
+  "metadata": {
+    "description": "30 giao diện có hình nền chuyển động cho Claude Code trên ứng dụng Claude Desktop."
+  },
+  "plugins": [
+    {
+      "name": "hoang-kim-art-deco",
+      "source": "./mods/hoang-kim-art-deco",
+      "description": "Giao diện Hoàng kim Art Deco (Sang trọng): Sảnh Art Deco đen vàng: cột bậc thang hai bên, các chùm đèn vàng hắt lên nhấp nháy chậm."
+    },
+    {
+      "name": "ngoc-luc-bao",
+      "source": "./mods/ngoc-luc-bao",
+      "description": "Giao diện Ngọc lục bảo (Sang trọng): Nền khảm đa giác xanh ngọc, bốn viên ngọc lục bảo viền vàng nghiêng nhẹ và lóe sáng."
+    },
+    {
+      "name": "ruou-vang-nhung",
+      "source": "./mods/ruou-vang-nhung",
+      "description": "Giao diện Rượu vang nhung (Sang trọng): Sân khấu rèm nhung đỏ rượu vang lay nhẹ, tua vàng hồng đung đưa, đèn sân khấu ấm."
+    },
+    {
+      "name": "dem-sapphire",
+      "source": "./mods/dem-sapphire",
+      "description": "Giao diện Đêm sapphire (Sang trọng): Trăng bạc trên mặt biển xanh sapphire, vệt sáng lấp lánh trên sóng, sóng ngầm trôi chậm."
+    },
+    {
+      "name": "da-cam-thach-den",
+      "source": "./mods/da-cam-thach-den",
+      "description": "Giao diện Đá cẩm thạch đen (Sang trọng): Cẩm thạch đen vân xám, các vết nứt hàn vàng kiểu kintsugi, ánh vàng chạy dọc vết nứt."
+    },
+    {
+      "name": "ngoc-trai",
+      "source": "./mods/ngoc-trai",
+      "description": "Giao diện Ngọc trai (Sang trọng): Lụa ngà uốn lượn trôi chậm, ba chuỗi ngọc trai treo đung đưa trên nền sâm panh."
+    },
+    {
+      "name": "nau-dat-kim",
+      "source": "./mods/nau-dat-kim",
+      "description": "Giao diện Nâu đất kim (Sang trọng): Nâu đất ấm và vàng kim, hoa văn gấm, hai vòng hoa văn xoay, bụi vàng bay lên."
+    },
+    {
+      "name": "tim-hoang-gia",
+      "source": "./mods/tim-hoang-gia",
+      "description": "Giao diện Tím hoàng gia (Sang trọng): Hai quạt lông công vươn lên từ hai góc dưới, mắt lông xanh vàng đung đưa trên nền tím."
+    },
+    {
+      "name": "xanh-doanh-nghiep",
+      "source": "./mods/xanh-doanh-nghiep",
+      "description": "Giao diện Xanh doanh nghiệp (Chuyên nghiệp): Biểu đồ tăng trưởng tự vẽ dần ở hai góc dưới, vòng tròn chỉ tiêu tăng giảm, nền navy."
+    },
+    {
+      "name": "than-chi-toi-gian",
+      "source": "./mods/than-chi-toi-gian",
+      "description": "Giao diện Than chì tối giản (Chuyên nghiệp): Hình khối Bauhaus mảnh trôi chậm, kim đồng hồ quay một vòng mỗi phút, điểm xanh ngọc."
+    },
+    {
+      "name": "ban-ve-ky-thuat",
+      "source": "./mods/ban-ve-ky-thuat",
+      "description": "Giao diện Bản vẽ kỹ thuật (Chuyên nghiệp): Giấy bản vẽ xanh có lưới, bốn bánh răng quay ăn khớp, đường kích thước nét đứt."
+    },
+    {
+      "name": "dong-du-lieu",
+      "source": "./mods/dong-du-lieu",
+      "description": "Giao diện Dòng dữ liệu (Chuyên nghiệp): Mưa dữ liệu xanh lam rơi dọc màn hình, các nút mạng phát sóng ở hai góc."
+    },
+    {
+      "name": "ket-noi-toan-cau",
+      "source": "./mods/ket-noi-toan-cau",
+      "description": "Giao diện Kết nối toàn cầu (Chuyên nghiệp): Quả địa cầu kinh tuyến xoay, vệ tinh vàng bay quanh quỹ đạo nghiêng."
+    },
+    {
+      "name": "giay-trang",
+      "source": "./mods/giay-trang",
+      "description": "Giao diện Giấy trắng (Chuyên nghiệp): Trang giấy kẻ dòng có lề đỏ, máy bay giấy bay chéo lên kèm vệt nét đứt."
+    },
+    {
+      "name": "xanh-sage",
+      "source": "./mods/xanh-sage",
+      "description": "Giao diện Xanh sage thanh lịch (Chuyên nghiệp): Những nhành bạch đàn treo từ mép trên, lá tròn xanh sage đung đưa nhẹ."
+    },
+    {
+      "name": "dem-thanh-pho",
+      "source": "./mods/dem-thanh-pho",
+      "description": "Giao diện Đêm thành phố (Chuyên nghiệp): Ba cột đèn pha quét bầu trời tím, đường chân trời thành phố với cửa sổ sáng tắt."
+    },
+    {
+      "name": "keo-ngot",
+      "source": "./mods/keo-ngot",
+      "description": "Giao diện Kẹo ngọt (Dễ thương): Kẹo mút xoắn xoay tròn ở các góc, kẹo bọc giấy nhiều màu nhún nhảy."
+    },
+    {
+      "name": "hoa-anh-dao",
+      "source": "./mods/hoa-anh-dao",
+      "description": "Giao diện Hoa anh đào (Dễ thương): Cành anh đào nở hoa ở hai góc, cánh hoa hồng rơi xoay trong gió."
+    },
+    {
+      "name": "may-bong",
+      "source": "./mods/may-bong",
+      "description": "Giao diện Mây bông (Dễ thương): Trời xanh pastel, mây bông trôi chậm, đàn chim nhỏ vỗ cánh bay ngang."
+    },
+    {
+      "name": "sao-dem-pastel",
+      "source": "./mods/sao-dem-pastel",
+      "description": "Giao diện Sao đêm pastel (Dễ thương): Ngôi sao và hành tinh treo trên sợi chỉ, đung đưa như đồ chơi nôi trên nền tím đêm."
+    },
+    {
+      "name": "bien-xanh",
+      "source": "./mods/bien-xanh",
+      "description": "Giao diện Biển xanh (Dễ thương): Sóng biển nhiều lớp, đàn cá nhỏ quẫy đuôi bơi ngang, bong bóng nước bay lên."
+    },
+    {
+      "name": "bong-bay",
+      "source": "./mods/bong-bay",
+      "description": "Giao diện Bóng bay (Dễ thương): Nền kem ấm, bóng bay nhiều màu bay lên đung đưa, giấy kim tuyến rơi."
+    },
+    {
+      "name": "vuon-hoa",
+      "source": "./mods/vuon-hoa",
+      "description": "Giao diện Vườn hoa (Dễ thương): Hoa nhỏ đung đưa dưới đáy, bướm nhiều màu vỗ cánh bay lượn trên nền bạc hà."
+    },
+    {
+      "name": "ho-sen",
+      "source": "./mods/ho-sen",
+      "description": "Giao diện Hồ sen (Thiên nhiên): Nhìn từ trên xuống mặt hồ: lá sen, hoa sen hồng, cá koi bơi vòng, gợn nước lan tỏa."
+    },
+    {
+      "name": "rung-tre",
+      "source": "./mods/rung-tre",
+      "description": "Giao diện Rừng tre (Thiên nhiên): Rừng tre đêm xanh thẫm, thân tre đung đưa hai bên, đom đóm lập lòe."
+    },
+    {
+      "name": "cuc-quang",
+      "source": "./mods/cuc-quang",
+      "description": "Giao diện Cực quang (Thiên nhiên): Dải cực quang xanh tím uốn lượn trên bầu trời đêm phương Bắc, dãy núi tối."
+    },
+    {
+      "name": "thien-ha",
+      "source": "./mods/thien-ha",
+      "description": "Giao diện Thiên hà (Thiên nhiên): Thiên hà xoắn ốc xoay chậm, tinh vân tím hồng, sao băng vụt qua."
+    },
+    {
+      "name": "hoang-hon-sa-mac",
+      "source": "./mods/hoang-hon-sa-mac",
+      "description": "Giao diện Hoàng hôn sa mạc (Thiên nhiên): Mặt trời lặn trên đồi cát, đoàn lạc đà đi chậm qua đường chân trời, cát bay theo gió."
+    },
+    {
+      "name": "mua-thu",
+      "source": "./mods/mua-thu",
+      "description": "Giao diện Mùa thu (Thiên nhiên): Những luồng gió thu vẽ thành vệt cam, lá phong đỏ cam rơi xoay theo gió."
+    },
+    {
+      "name": "dong-tuyet",
+      "source": "./mods/dong-tuyet",
+      "description": "Giao diện Đông tuyết (Thiên nhiên): Rừng thông phủ tuyết hai lớp, tuyết rơi xoay nhẹ trên nền đêm đông xanh lạnh."
+    }
+  ]
+}
